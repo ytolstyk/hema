@@ -4,6 +4,8 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "annotate"
+  gem 'pry-rails'
+  gem 'quiet_assets'
 end
 
 gem 'rails', '4.1.4'
