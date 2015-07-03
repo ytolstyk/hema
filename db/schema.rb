@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703185345) do
+ActiveRecord::Schema.define(version: 20150703190013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 20150703185345) do
   add_index "events", ["location"], name: "index_events_on_location", using: :btree
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
   add_index "events", ["organizer"], name: "index_events_on_organizer", using: :btree
+
+  create_table "exchanges", force: true do |t|
+    t.integer  "match_id",   null: false
+    t.string   "target"
+    t.boolean  "afterblow",  null: false
+    t.boolean  "double_hit", null: false
+    t.integer  "penalty"
+    t.integer  "fighter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exchanges", ["fighter_id"], name: "index_exchanges_on_fighter_id", using: :btree
+  add_index "exchanges", ["match_id"], name: "index_exchanges_on_match_id", using: :btree
 
   create_table "fighters", force: true do |t|
     t.string   "first_name", null: false
