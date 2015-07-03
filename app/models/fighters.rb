@@ -22,10 +22,10 @@ class Fighters < ActiveRecord::Base
     source: :tournament
   has_many :matches1,
     class_name: 'Matches',
-    parimary_key: :id,
+    primary_key: :id,
     foreign_key: :fighter1
   has_many :matches1,
     class_name: 'Matches',
-    parimary_key: :id,
+    primary_key: :id,
     foreign_key: :fighter1
 end
