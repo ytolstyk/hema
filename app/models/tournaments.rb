@@ -13,4 +13,15 @@
 #
 
 class Tournaments < ActiveRecord::Base
+  validates :event_id, :name, :type, presence: true
+  belongs_to :event
+  has_many :scores, dependent: :destroy
+  has_many :tournament_fighters,
+    class_name: 'TournamentFighters',
+    primary_key: :id,
+    foreign_key: :tournament_id
+  has_many :fighters,
+    through: :tournament_fighters,
+    source: :fighter
+  has_many :matches, dependent: :destroy
 end

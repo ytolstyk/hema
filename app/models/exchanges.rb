@@ -14,4 +14,6 @@
 #
 
 class Exchanges < ActiveRecord::Base
+  validates :match_id, :afterblow, :double_hit, presence: true
+  belongs_to :match
 end

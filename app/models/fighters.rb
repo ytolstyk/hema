@@ -12,4 +12,20 @@
 #
 
 class Fighters < ActiveRecord::Base
+  validates :first_name, :last_name, presence: true
+  has_many :tournament_fighters,
+    class_name: 'TournamentFighters',
+    primary_key: :id,
+    foreign_key: :fighter_id
+  has_many :tournaments,
+    through: :tournament_fighters,
+    source: :tournament
+  has_many :matches1,
+    class_name: 'Matches',
+    parimary_key: :id,
+    foreign_key: :fighter1
+  has_many :matches1,
+    class_name: 'Matches',
+    parimary_key: :id,
+    foreign_key: :fighter1
 end
