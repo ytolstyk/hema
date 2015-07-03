@@ -10,4 +10,7 @@
 #
 
 class TournamentFighters < ActiveRecord::Base
+  validates :fighter_id, :tournament_id, presence: true
+  belongs_to :fighter
+  belongs_to :tournament
 end
