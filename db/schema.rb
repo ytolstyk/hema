@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703183703) do
+ActiveRecord::Schema.define(version: 20150703184155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150703183703) do
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
   add_index "events", ["organizer"], name: "index_events_on_organizer", using: :btree
 
-  create_table "people", force: true do |t|
+  create_table "fighters", force: true do |t|
     t.string   "first_name", null: false
     t.string   "last_name",  null: false
     t.string   "school"
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 20150703183703) do
     t.datetime "updated_at"
   end
 
-  add_index "people", ["gender"], name: "index_people_on_gender", using: :btree
-  add_index "people", ["last_name"], name: "index_people_on_last_name", using: :btree
-  add_index "people", ["school"], name: "index_people_on_school", using: :btree
+  add_index "fighters", ["gender"], name: "index_fighters_on_gender", using: :btree
+  add_index "fighters", ["last_name"], name: "index_fighters_on_last_name", using: :btree
+  add_index "fighters", ["school"], name: "index_fighters_on_school", using: :btree
 
   create_table "tournament_fighters", force: true do |t|
     t.integer  "fighter_id"
