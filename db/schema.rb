@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704041218) do
+ActiveRecord::Schema.define(version: 20150704171217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,23 +68,21 @@ ActiveRecord::Schema.define(version: 20150704041218) do
   add_index "match_fighters", ["match_id"], name: "index_match_fighters_on_match_id", using: :btree
 
   create_table "matches", force: true do |t|
-    t.integer  "tournament_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  add_index "matches", ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree
-
-  create_table "pool_matches", force: true do |t|
     t.integer  "pool_id",    null: false
-    t.integer  "match_id",   null: false
+  end
+
+  create_table "pool_fighters", force: true do |t|
+    t.integer  "pool_id",    null: false
+    t.integer  "fighter_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pool_matches", ["match_id"], name: "index_pool_matches_on_match_id", using: :btree
-  add_index "pool_matches", ["pool_id", "match_id"], name: "index_pool_matches_on_pool_id_and_match_id", unique: true, using: :btree
-  add_index "pool_matches", ["pool_id"], name: "index_pool_matches_on_pool_id", using: :btree
+  add_index "pool_fighters", ["fighter_id"], name: "index_pool_fighters_on_fighter_id", using: :btree
+  add_index "pool_fighters", ["pool_id", "fighter_id"], name: "index_pool_fighters_on_pool_id_and_fighter_id", unique: true, using: :btree
+  add_index "pool_fighters", ["pool_id"], name: "index_pool_fighters_on_pool_id", using: :btree
 
   create_table "pools", force: true do |t|
     t.string   "name",          null: false
