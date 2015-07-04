@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root 'static#home'
+  root 'events#index'
 
   scope :static do
-    
+
+  end
+  
+  scope controller: 'events' do
+    get 'index' => :index 
+
   end
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
