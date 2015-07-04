@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   scope 'events', controller: 'events' do
     root to: :index, as: :events_index
     get ':id' => :show, as: :events_show
+    get 'new' => :new, as: :events_new
+    post 'create' => :create, as: :events_create
   end
 
   scope 'tournaments', controller: 'tournaments' do
@@ -20,9 +22,10 @@ Rails.application.routes.draw do
   scope 'users', controller: 'users' do
     root to: :index, as: :users_index
     get 'new' => :new, as: :users_new
+    get ':id' => :show, as: :users_show
     post 'create' => :create, as: :users_create
-    get 'show' => :show, as: :users_show
-    post 'update' => :update, as: :users_update
+    post ':id' => :update, as: :users_update
+    delete ':id'=> :destroy, as: :users_destroy
   end
 
   scope 'session', controller: 'sessions' do
