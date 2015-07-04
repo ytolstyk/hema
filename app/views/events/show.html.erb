@@ -2,6 +2,8 @@
 <h2><%= @event.date %></h2>
 <ul>
   <% @tournaments.each do |tournament| %>
-    <li><%= tournament.name %></li>
+    <li><a href="<%= tournaments_show_path tournament %>">
+      <%= tournament.name %>
+    </a></li>
   <% end %>
 </ul>
