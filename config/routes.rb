@@ -2,12 +2,19 @@ Rails.application.routes.draw do
   root 'events#index'
 
   scope :static do
-
   end
   
-  scope controller: 'events' do
-    get 'index' => :index 
+  scope 'events', controller: 'events' do
+    get 'index' => :index, as: :events_index
+    get ':id' => :show, as: :events_show
+  end
 
+  scope 'tournaments', controller: 'tournaments' do
+    get ':id' => :show, as: :tournaments_show
+  end
+
+  scope 'fighters', controller: 'fighters' do
+    get ':id' => :show, as: :fighters_show
   end
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

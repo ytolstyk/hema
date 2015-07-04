@@ -1,5 +1,7 @@
 <ul>
   <% @events.each do |event| %>
-    <li><%= event.name %> <%= event.date %></li> 
+    <li><a href="<%= events_show_path event %>">
+      <%= event.name %> <%= event.date %>
+    </a></li> 
   <% end %>
 </ul>

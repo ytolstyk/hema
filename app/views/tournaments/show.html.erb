@@ -1,0 +1,8 @@
+<h1><%= @tournament.name %></h1>
+<ul>
+  <% @fighters.each do |fighter| %>
+    <li><a href="<%= fighters_show_path fighter %>">
+      <%= fighter.first_name %> <%= fighter.last_name %>
+    </a></li>
+  <% end %>
+</ul>
