@@ -11,15 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.includes(:avatars, :liked_pictures).find_by_session_token(session[:session_token])
-  end
-
-  def current_avatar
-    if current_user.avatars.empty?
-      @current_avatar ||= "https://s3-us-west-1.amazonaws.com/picturito-dev/images/avatars/default_small.jpeg"
-    else
-      @current_avatar ||= current_user.avatars.last.image.url(:small)
-    end
+    @current_user ||= User.find_by_session_token(session[:session_token])
   end
 
   def logout_user!(user)
@@ -30,6 +22,6 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_logged_in
-    redirect_to new_session_url unless current_user
+    redirect_to new_session_url if !current_user
   end
 end
