@@ -9,8 +9,8 @@
 #
 
 class Match < ActiveRecord::Base
-  validates :tournament_id, presence: true
-  belongs_to :tournament
+  validates :pool_id, presence: true
+  belongs_to :pool
   has_many :exchanges
   has_many :match_fighters,
     class_name: 'MatchFighter',
