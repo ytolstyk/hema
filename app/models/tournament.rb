@@ -22,5 +22,5 @@ class Tournament < ActiveRecord::Base
   has_many :fighters,
     through: :tournament_fighters,
     source: :fighter
-  has_many :matches, dependent: :destroy
+  has_many :pools, dependent: :destroy
 end
