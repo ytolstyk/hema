@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
   
   scope 'events', controller: 'events' do
-    get 'index' => :index, as: :events_index
+    root to: :index, as: :events_index
     get ':id' => :show, as: :events_show
   end
 
@@ -18,15 +18,16 @@ Rails.application.routes.draw do
   end
 
   scope 'users', controller: 'users' do
-    get 'index' => :index, as: :users_index
+    root to: :index, as: :users_index
     get 'new' => :new, as: :users_new
     post 'create' => :create, as: :users_create
     get 'show' => :show, as: :users_show
+    post 'update' => :update, as: :users_update
   end
 
-  scope 'sessions', controller: 'sessions' do
+  scope 'session', controller: 'sessions' do
     get 'new' => :new, as: :sessions_new
-    post 'create' => :create, as: :sessions_create
-    delete 'destroy' => :destroy, as: :sessions_destroy
+    post 'session' => :create
+    delete 'session' => :destroy
   end
 end

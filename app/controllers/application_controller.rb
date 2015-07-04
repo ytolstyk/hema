@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
     user.reset_session_token!
     session[:session_token] = user.class.generate_session_token
 
-    redirect_to new_session_url
+    redirect_to sessions_new_path
   end
 
   def ensure_logged_in
-    redirect_to new_session_url if !current_user
+    redirect_to sessions_new_path if !current_user
   end
 end
