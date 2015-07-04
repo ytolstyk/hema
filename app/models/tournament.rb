@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  name           :string(255)      not null
-#  type           :string(255)      not null
+#  weapon_type    :string(255)      not null
 #  event_id       :integer          not null
 #  gender         :string(255)
 #  material       :string(255)
@@ -14,14 +14,11 @@
 #  victory_points :integer
 #
 
-class Tournaments < ActiveRecord::Base
-  validates :event_id, :name, :type, presence: true
+class Tournament < ActiveRecord::Base
+  validates :event_id, :name, :weapon_type, presence: true
   belongs_to :event
   has_many :scores, dependent: :destroy
-  has_many :tournament_fighters,
-    class_name: 'TournamentFighters',
-    primary_key: :id,
-    foreign_key: :tournament_id
+  has_many :tournament_fighters
   has_many :fighters,
     through: :tournament_fighters,
     source: :fighter

@@ -10,7 +10,7 @@
 #  updated_at    :datetime
 #
 
-class Scores < ActiveRecord::Base
+class Score < ActiveRecord::Base
   validates :tournament_id, :target, :points, presence: true
   belongs_to :tournament, dependent: :destroy
 end

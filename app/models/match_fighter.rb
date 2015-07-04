@@ -9,8 +9,9 @@
 #  updated_at :datetime
 #
 
-class MatchFighters < ActiveRecord::Base
+class MatchFighter < ActiveRecord::Base
   validates :fighter_id, :match_id, presence: true
+  validates_uniqueness_of :fighter_id, scope: :match_id
   belongs_to :fighter
   belongs_to :match
 end

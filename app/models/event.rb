@@ -11,7 +11,7 @@
 #  updated_at :datetime
 #
 
-class Events < ActiveRecord::Base
+class Event < ActiveRecord::Base
   validates :name, presence: true
   has_many :tournaments
 end
