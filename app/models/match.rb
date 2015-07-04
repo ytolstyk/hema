@@ -8,15 +8,15 @@
 #  updated_at    :datetime
 #
 
-class Matches < ActiveRecord::Base
+class Match < ActiveRecord::Base
   validates :tournament_id, presence: true
   belongs_to :tournament
   has_many :exchanges
   has_many :match_fighters,
-    class_name: 'MatchFighters',
+    class_name: 'MatchFighter',
     primary_key: :id,
     foreign_key: :match_id
   has_many :fighters,
-    through: :tournament_fighters,
+    through: :match_fighters,
     source: :fighter
 end

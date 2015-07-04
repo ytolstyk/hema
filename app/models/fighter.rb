@@ -11,17 +11,14 @@
 #  updated_at :datetime
 #
 
-class Fighters < ActiveRecord::Base
+class Fighter < ActiveRecord::Base
   validates :first_name, :last_name, presence: true
-  has_many :tournament_fighters,
-    class_name: 'TournamentFighters',
-    primary_key: :id,
-    foreign_key: :fighter_id
+  has_many :tournament_fighters
   has_many :tournaments,
     through: :tournament_fighters,
     source: :tournament
   has_many :match_fighters,
-    class_name: 'MatchFighters',
+    class_name: 'MatchFighter',
     primary_key: :id,
     foreign_key: :fighter_id
   has_many :matches,

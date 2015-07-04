@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703204409) do
+ActiveRecord::Schema.define(version: 20150703231537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20150703204409) do
 
   create_table "tournaments", force: true do |t|
     t.string   "name",           null: false
-    t.string   "type",           null: false
+    t.string   "weapon_type",    null: false
     t.integer  "event_id",       null: false
     t.string   "gender"
     t.string   "material"
@@ -112,6 +112,6 @@ ActiveRecord::Schema.define(version: 20150703204409) do
   add_index "tournaments", ["gender"], name: "index_tournaments_on_gender", using: :btree
   add_index "tournaments", ["material"], name: "index_tournaments_on_material", using: :btree
   add_index "tournaments", ["name"], name: "index_tournaments_on_name", using: :btree
-  add_index "tournaments", ["type"], name: "index_tournaments_on_type", using: :btree
+  add_index "tournaments", ["weapon_type"], name: "index_tournaments_on_weapon_type", using: :btree
 
 end

@@ -13,7 +13,7 @@
 #  updated_at :datetime
 #
 
-class Exchanges < ActiveRecord::Base
+class Exchange < ActiveRecord::Base
   validates :match_id, :afterblow, :double_hit, presence: true
   belongs_to :match
 end
