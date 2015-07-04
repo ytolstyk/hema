@@ -23,8 +23,4 @@ class Tournament < ActiveRecord::Base
     through: :tournament_fighters,
     source: :fighter
   has_many :matches, dependent: :destroy
-
-  def generate_matches_from_pool(pool)
-    
-  end
 end
