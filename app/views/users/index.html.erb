@@ -1,0 +1,16 @@
+<h1>Users</h1>
+<div>
+  <a href="<%= users_new_path %>">Create User</a>
+</div>
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= user.username %>
+      <form action="<%= users_destroy_path(user) %>" class="user-delete-form" method="post">
+        <input name="_method" type="hidden" value="delete">
+        <input class="btn btn-small" type="submit" value="X">
+        <%= render partial: 'partials/authenticity_token' %>
+      </form>
+    </li>
+  <% end %>
+</ul>
