@@ -24,7 +24,7 @@ class Pool < ActiveRecord::Base
   def generate_matches
     matches_array = pool_fighters.combination(2).to_a
     matches_array.each do |fighter_pair|
-      match = self.matches.create
+      match = matches.create
       fighter_pair.each do |fighter|
         match.match_fighters.create(fighter_id: fighter)
       end
