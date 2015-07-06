@@ -20,4 +20,14 @@ class Pool < ActiveRecord::Base
   has_many :fighters,
     through: :pool_fighters,
     source: :fighter
+
+  def generate_matches
+    matches_array = self.pool_fighters.combination(2).to_a
+    matches_array.each do |fighter_pair|
+      match = self.matches.create
+      fighter_pair.each do |fighter|
+        match.match_fighters.create(fighter_id: fighter)
+      end
+    end
+  end
 end
