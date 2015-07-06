@@ -22,7 +22,7 @@ class Pool < ActiveRecord::Base
     source: :fighter
 
   def generate_matches
-    matches_array = self.pool_fighters.combination(2).to_a
+    matches_array = pool_fighters.combination(2).to_a
     matches_array.each do |fighter_pair|
       match = self.matches.create
       fighter_pair.each do |fighter|

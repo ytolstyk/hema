@@ -8,7 +8,6 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #
-require 'spec_helper'
 
 describe Pool do
   describe '#generate_matches' do
