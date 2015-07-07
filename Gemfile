@@ -8,6 +8,7 @@ group :development do
   gem 'quiet_assets'
 end
 
+gem 'newrelic_rpm'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'rails', '4.1.4'
 gem 'sqlite3'
