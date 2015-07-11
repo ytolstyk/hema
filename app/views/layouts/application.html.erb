@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HEMA</title>
-  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>HEMA</title>
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<%= render partial: 'partials/navbar' %>
+  <%= render partial: 'partials/navbar' %>
 
-<body>
+  <body>
+    <%= yield %>
+  </body>
 
-<%= yield %>
-
-</body>
+  <%= render partial: 'partials/footer' %>
 </html>
