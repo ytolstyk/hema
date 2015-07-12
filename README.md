@@ -1,4 +1,5 @@
-== HEMA tournaments
+HEMA tournaments
+================
 
 
 Manages event creation, participant registration and match timeline for HEMA tournaments.
