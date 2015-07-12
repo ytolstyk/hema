@@ -14,4 +14,14 @@ class TournamentFighter < ActiveRecord::Base
   validates_uniqueness_of :fighter_id, scope: :tournament_id
   belongs_to :fighter
   belongs_to :tournament
+
+  after_create :add_to_default_pool
+
+  def add_to_default_pool
+    tournament = Tournament.find(tournament_id)
+    default_pool = tournament.pools.find_by_name('Unassigned')
+    if default_pool
+      default_pool.pool_fighters.create(fighter_id: fighter_id)
+    end
+  end
 end
