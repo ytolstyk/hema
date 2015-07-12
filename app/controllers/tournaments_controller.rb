@@ -6,6 +6,12 @@ class TournamentsController < ApplicationController
     @fighters = @tournament.fighters
   end
 
+  def show_pools
+    @tournament = Tournament.find(params[:id])
+    @fighters = @tournament.fighters
+    @pools = @tournament.pools
+  end
+
   def create
     @tournament = Tournament.new(tournament_params)
 

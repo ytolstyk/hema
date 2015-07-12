@@ -1,4 +1,5 @@
 <h1><%= @tournament.name %></h1>
+<div> <a href="<%= show_pools_path @tournament %>">Show pools</a></div>
 <ul>
   <% @fighters.each do |fighter| %>
     <li><a href="<%= fighters_show_path fighter %>">

@@ -1,0 +1,13 @@
+<h1><%= @tournament.name %></h1>
+  <% @pools.each do |pool| %>
+    <div>
+      <%= pool.name %>
+      <ul>
+        <% pool.fighters.each do |fighter| %>
+          <li>
+            <%= fighter.first_name %> <%= fighter.last_name %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
