@@ -23,4 +23,10 @@ class Tournament < ActiveRecord::Base
     through: :tournament_fighters,
     source: :fighter
   has_many :pools, dependent: :destroy
+
+  after_create :create_default_pool
+
+  def create_default_pool
+    pools.create(name: 'Unassigned')
+  end
 end
