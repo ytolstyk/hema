@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="tournament-form">
+    <% if flash[:errors] %>
+      <ul class="flash-errors">
+        <% flash[:errors].try(:each) do |error| %>
+          <li class="alert alert-danger"><%= error %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <h1>New Tournament</h1>
+
+    <form action="<%= tournaments_create_path %>" method="POST" role="form">
+      <%= render partial: 'partials/authenticity_token' %>
+      <input type="hidden" name="tournament[event_id]" value="<%= @event.id %>"
+
+      <div class="form-group">
+        <label>Name
+          <input type="text" name="tournament[name]" class="form-control" maxlength="200" value="<% @tournament.name %>">
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Weapon type
+          <select name="tournament[weapon_type]" class="form-control" required>
+            <% weapon_type_options.each do |value, name| %>
+              <option value="<%= value %>"><%= name %></option>
+            <% end %>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Gender
+          <select name="tournament[gender]" class="form-control">
+            <% gender_options.each do |value, name| %>
+              <option value="<%= value %>"><%= name %></option>
+            <% end %>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Material
+          <input type="text" name="tournament[material]" class="form-control" maxlength="200" value="<% @tournament.material %>">
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Maximum Match Duration (seconds)
+          <input type="number" name="tournament[duration]" class="form-control"
+                 min="0" maxlength="200" value="<% @tournament.duration %>">
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Maximum Points (points needed for a match victory)
+          <input type="number" name="tournament[victory_points]" class="form-control"
+                 min="0" maxlength="200" value="<% @tournament.victory_points %>">
+        </label>
+      </div>
+
+      <button class="btn btn-primary sign-in-button">Create</button>
+    </form>
+  </div>
+</div>

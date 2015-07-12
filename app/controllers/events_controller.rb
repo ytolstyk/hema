@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :ensure_logged_in, only: [:new, :create, :destroy, :add_tournament]
+
   def index 
     @events = Event.all
   end
@@ -21,6 +23,11 @@ class EventsController < ApplicationController
       flash.now[:errors] = @event.errors.full_messages
       render :new
     end
+  end
+
+  def add_tournament
+    @event = Event.find(params[:id])
+    @tournament = @event.tournaments.new
   end
 
   def destroy
