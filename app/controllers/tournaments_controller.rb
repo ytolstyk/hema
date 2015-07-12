@@ -6,12 +6,6 @@ class TournamentsController < ApplicationController
     @fighters = @tournament.fighters
   end
 
-  def show_pools
-    @tournament = Tournament.find(params[:id])
-    @fighters = @tournament.fighters
-    @pools = @tournament.pools
-  end
-
   def create
     @tournament = Tournament.new(tournament_params)
 
@@ -30,6 +24,12 @@ class TournamentsController < ApplicationController
     redirect_to events_show_path(event_id)
   end
 
+  def tournament_pools
+    @tournament = Tournament.find(params[:id])
+    @fighters = @tournament.fighters
+    @pools = @tournament.pools
+  end
+  
   private
 
   def tournament_params

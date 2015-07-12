@@ -1,6 +1,7 @@
 <h1><%= @tournament.name %></h1>
+<ul>
   <% @pools.each do |pool| %>
-    <div>
+    <li>
       <%= pool.name %>
       <ul>
         <% pool.fighters.each do |fighter| %>
@@ -9,5 +10,6 @@
           </li>
         <% end %>
       </ul>
-    </div>
+    </li>
   <% end %>
+</ul>
