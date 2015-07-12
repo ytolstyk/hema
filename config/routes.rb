@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   
   scope 'events', controller: 'events' do
     root to: :index, as: :events_index
-    get ':id' => :show, as: :events_show
     get 'new' => :new, as: :events_new
+    get ':id' => :show, as: :events_show
     post 'create' => :create, as: :events_create
+    delete ':id'=> :destroy, as: :events_destroy
   end
 
   scope 'tournaments', controller: 'tournaments' do
