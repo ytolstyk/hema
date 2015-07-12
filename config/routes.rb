@@ -8,12 +8,15 @@ Rails.application.routes.draw do
     root to: :index, as: :events_index
     get 'new' => :new, as: :events_new
     get ':id' => :show, as: :events_show
+    get ':id/add_tournament' => :add_tournament, as: :add_tournament
     post 'create' => :create, as: :events_create
     delete ':id'=> :destroy, as: :events_destroy
   end
 
   scope 'tournaments', controller: 'tournaments' do
     get ':id' => :show, as: :tournaments_show
+    post 'create' => :create, as: :tournaments_create
+    delete ':id' => :destroy, as: :tournaments_destroy
   end
 
   scope 'fighters', controller: 'fighters' do

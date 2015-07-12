@@ -1,6 +1,9 @@
 <h1><%= @event.name %></h1>
 <h2><%= @event.date %></h2>
 <ul>
+  <% if current_user %>
+    <li><a href="<%= add_tournament_path %>">Add Tournament</a></li>
+  <% end %>
   <% @tournaments.each do |tournament| %>
     <li><a href="<%= tournaments_show_path tournament %>">
       <%= tournament.name %>
