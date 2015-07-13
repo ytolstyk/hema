@@ -20,11 +20,6 @@ class Pool < ActiveRecord::Base
   has_many :fighters,
     through: :pool_fighters,
     source: :fighter
-  # before_create :make_default_name
-
-  # def make_default_name
-  #   self.name = "Pool #{tournament.pools.count + 1}" if name.nil?
-  # end
 
   def reassign_fighters(pool_name)
     if self.fighters.count == 0
