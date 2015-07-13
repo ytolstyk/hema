@@ -13,3 +13,8 @@
     </li>
   <% end %>
 </ul>
+ <form action="<%= pools_create_path %>" method="POST" role="form">
+    <%= render partial: 'partials/authenticity_token' %>
+    <input type="hidden" name="pool[tournament_id]" value="<%= @tournament.id %>">
+    <button class="btn btn-primary sign-in-button">Add pool</button>
+  </form>    
