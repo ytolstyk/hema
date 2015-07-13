@@ -19,7 +19,9 @@ class Event < ActiveRecord::Base
   private
 
   def strings_shorter_than_255
-    if self.name.length > 254 || self.organizer.length > 254 || self.location.length > 254
+    if self.name.length > 254 ||
+      (self.organizer && self.organizer.length > 254) ||
+      (self.location && self.location.length > 254)
       errors.add(:event, "strings can't be longer than 255 characters")
     end
   end
