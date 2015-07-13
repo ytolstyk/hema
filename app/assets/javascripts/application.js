@@ -13,3 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require tournaments
+
+var hema = hema || {};

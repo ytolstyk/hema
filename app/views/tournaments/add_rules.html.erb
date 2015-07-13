@@ -1,0 +1,27 @@
+<%= javascript_include_tag 'tournaments/add_rules' %>
+
+<div class="tournaments-add-rules">
+  <% if flash[:errors] %>
+    <ul class="flash-errors">
+      <% flash[:errors].try(:each) do |error| %>
+        <li class="alert alert-danger"><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <h1>Rules</h1>
+
+  <form action="<%= tournaments_create_path %>" method="POST" role="form" class="add-rules-">
+    <%= render partial: 'partials/authenticity_token' %>
+    <input type="hidden" name="tournament[id]" value="<%= @tournament.id %>">
+
+    <%= render partial: 'new_score', locals: { selected_value: :arm, default_points: 1 } %>
+    <%= render partial: 'new_score', locals: { selected_value: :head, default_points: 4 } %>
+    <%= render partial: 'new_score', locals: { selected_value: :torso, default_points: 3 } %>
+    <%= render partial: 'new_score', locals: { selected_value: :leg, default_points: 2 } %>
+
+    <div><a href="#" class="tournaments-rules-add-more">Add more</a></div>
+
+    <button class="btn btn-primary sign-in-button">Save</button>
+  </form>
+</div>

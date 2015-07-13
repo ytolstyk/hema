@@ -1,0 +1,12 @@
+<div class="form-group tournament-rule">
+  <label>Target
+    <select type="text" name="score[target]" class="form-control">
+      <% score_options.each do |value, name| %>
+        <option value="<%= value %>" <%= 'selected' if value == selected_value %>><%= name %></option>
+      <% end %>
+    </select>
+  </label>
+  <label>Points
+    <input type="number" name="tournament[name]" class="form-control" min="0" value="<%= default_points %>">
+  </label>
+</div>

@@ -29,6 +29,10 @@ class TournamentsController < ApplicationController
     @fighters = @tournament.fighters
     @pools = @tournament.pools
   end
+
+  def add_rules
+    @tournament = Tournament.find(params[:id])
+  end
   
   private
 
