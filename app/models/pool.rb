@@ -26,6 +26,16 @@ class Pool < ActiveRecord::Base
     self.name = "Pool #{tournament.pools.count + 1}"
   end
 
+  def reassign_fighters(pool_name)
+    tournament = Tournament.find(tournament_id)
+    new_pool = tournament.pools.find_by_name(pool_name)
+    self.fighters.each do |fighter|
+      new_pool.pool_fighters.create(fighter_id: fighter.id)
+      self.fighters.delete(fighter)
+    end
+
+  end
+
   def generate_matches
     matches_array = pool_fighters.combination(2).to_a
     matches_array.each do |fighter_pair|
