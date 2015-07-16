@@ -3,6 +3,13 @@
   <% @pools.each do |pool| %>
     <li>
       <%= pool.name %>
+      <% if pool.name != Pool::DEFAULT_POOL && current_user %>
+        <form action="<%= pools_destroy_path(pool) %>" class="event-delete-form" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <input class="btn btn-small" type="submit" value="X">
+          <%= render partial: 'partials/authenticity_token' %>
+        </form>
+      <% end %>
       <ul>
         <% pool.fighters.each do |fighter| %>
           <li>
@@ -13,3 +20,10 @@
     </li>
   <% end %>
 </ul>
+<% if current_user %>
+  <form action="<%= pools_create_path %>" method="POST" role="form">
+    <%= render partial: 'partials/authenticity_token' %>
+    <input type="hidden" name="pool[tournament_id]" value="<%= @tournament.id %>">
+    <button class="btn btn-primary sign-in-button">Add pool</button>
+  </form>
+<% end %>    

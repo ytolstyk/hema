@@ -19,9 +19,9 @@ class TournamentFighter < ActiveRecord::Base
 
   def add_to_default_pool
     tournament = Tournament.find(tournament_id)
-    default_pool = tournament.pools.find_by_name('Unassigned')
+    default_pool = tournament.pools.find_by_name(Pool::DEFAULT_POOL)
     if !default_pool
-      default_pool = tournament.pools.create(name: 'Unassigned')
+      default_pool = tournament.pools.create(name: Pool::DEFAULT_POOL)
     end
     default_pool.pool_fighters.create(fighter_id: fighter_id)
   end
