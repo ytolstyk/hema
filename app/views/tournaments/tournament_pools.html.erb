@@ -3,7 +3,7 @@
   <% @pools.each do |pool| %>
     <li>
       <%= pool.name %>
-      <% if pool.name != 'Unassigned' && current_user %>
+      <% if pool.name != Pool::DEFAULT_POOL && current_user %>
         <form action="<%= pools_destroy_path(pool) %>" class="event-delete-form" method="post">
           <input name="_method" type="hidden" value="delete">
           <input class="btn btn-small" type="submit" value="X">
