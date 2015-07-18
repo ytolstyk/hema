@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
       (self.organizer && self.organizer.length > 254) ||
       (self.location && self.location.length > 254)
       errors.add(:event, "strings can't be longer than 255 characters")
+      raise "Strings can't be longer than 255 characters"
     end
   end
 end
