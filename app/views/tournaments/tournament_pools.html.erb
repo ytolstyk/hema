@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'tournaments/tournament_pools' %>
+
 <h1><%= @tournament.name %></h1>
 <ul>
   <% @pools.each do |pool| %>
@@ -10,7 +12,7 @@
           <%= render partial: 'partials/authenticity_token' %>
         </form>
       <% end %>
-      <ul>
+      <ul class='tournament-pool-fighters-sortable'>
         <% pool.fighters.each do |fighter| %>
           <li>
             <%= fighter.first_name %> <%= fighter.last_name %>
