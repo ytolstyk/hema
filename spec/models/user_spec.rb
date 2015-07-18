@@ -14,6 +14,12 @@ require 'spec_helper'
 
 describe User do
   context "validations" do
+    before(:each) do
+      User.all.each do |user|
+        user.destroy
+      end
+    end
+
     it "validates username" do
       user = User.create(password: 'password')
       user.errors.full_messages.length.should > 0
