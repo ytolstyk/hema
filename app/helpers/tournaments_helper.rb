@@ -18,10 +18,10 @@ module TournamentsHelper
 
   def score_options
     {
-      arm: 'Arm',
-      head: 'Head',
-      leg: 'Leg',
-      torso: 'Torso'
+      'arm' => 'Arm',
+      'head' => 'Head',
+      'leg' => 'Leg',
+      'torso' => 'Torso'
     }
   end
 end
