@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      not null
+#  date       :date
+#  organizer  :string(255)
+#  location   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe Event do
@@ -19,9 +32,9 @@ describe Event do
     end
   end
 
-  context "relations" do
+  context "associations" do
     it "should have tournaments" do
-      Event.create(name: 'testing_tournaments').tournaments.should be_truthy
+      Event.reflect_on_association(:tournaments).macro.should == :has_many
     end
   end
 end
