@@ -27,6 +27,6 @@ class Tournament < ActiveRecord::Base
   after_create :create_default_pool
 
   def create_default_pool
-    pools.create(name: Pool::DEFAUL_POOL)
+    pools.create(name: Pool::DEFAULT_POOL)
   end
 end
