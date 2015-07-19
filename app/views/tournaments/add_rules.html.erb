@@ -1,14 +1,6 @@
 <%= javascript_include_tag 'tournaments/add_rules' %>
 
 <div class="tournaments-add-rules">
-  <% if flash[:errors] %>
-    <ul class="flash-errors">
-      <% flash[:errors].try(:each) do |error| %>
-        <li class="alert alert-danger"><%= error %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <h1>Rules</h1>
 
   <form action="<%= tournaments_create_scores_path(@tournament.id) %>" method="POST" role="form" class="tournaments-add-rules-form">
