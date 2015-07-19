@@ -38,16 +38,18 @@ PLAYERS = [
   { first_name: 'dasha', last_name: 'bronson' }
 ]
 
+Fighter.create(PLAYERS)
+
 Event.create(EVENTS).each_with_index do |event, index|
   event.tournaments.create(TOURNAMENTS[index % TOURNAMENTS.length ])
   event.tournaments.create(TOURNAMENTS[(index + 1) % TOURNAMENTS.length])
 end
 
 Tournament.all.each_with_index do |tournament, index|
-  tournament.fighters.create(PLAYERS[index % PLAYERS.length])
-  tournament.fighters.create(PLAYERS[index + 1 % PLAYERS.length])
-  tournament.fighters.create(PLAYERS[index + 2 % PLAYERS.length])
-  tournament.fighters.create(PLAYERS[index + 3 % PLAYERS.length])
+  tournament.tournament_fighters.create(fighter_id: index % PLAYERS.length)
+  tournament.tournament_fighters.create(fighter_id: index + 1 % PLAYERS.length)
+  tournament.tournament_fighters.create(fighter_id: index + 2 % PLAYERS.length)
+  tournament.tournament_fighters.create(fighter_id: index + 3 % PLAYERS.length)
 end
 
 Tournament.all.each_with_index do |tournament, index|

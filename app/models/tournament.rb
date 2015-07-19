@@ -27,7 +27,7 @@ class Tournament < ActiveRecord::Base
   after_create :create_default_pool, :add_score
 
   def create_default_pool
-    pools.create(name: 'Unassigned')
+    pools.create(name: Pool::DEFAULT_POOL)
   end
 
   def add_score

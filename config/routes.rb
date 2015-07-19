@@ -22,6 +22,11 @@ Rails.application.routes.draw do
     delete ':id' => :destroy, as: :tournaments_destroy
   end
 
+  scope 'pools', controller: 'pools' do
+    post 'create' => :create, as: :pools_create
+    delete ':id' => :destroy, as: :pools_destroy
+  end
+
   scope 'fighters', controller: 'fighters' do
     get ':id' => :show, as: :fighters_show
   end
