@@ -14,9 +14,7 @@ require 'spec_helper'
 describe TournamentFighter do
   context "validations" do
     before(:each) do
-      TournamentFighter.all.each do |tournament_fighter|
-        tournament_fighter.destroy
-      end
+      TournamentFighter.delete_all
     end
 
     it "validates fighter_id" do
