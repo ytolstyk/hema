@@ -24,9 +24,13 @@ class Tournament < ActiveRecord::Base
     source: :fighter
   has_many :pools, dependent: :destroy
 
-  after_create :create_default_pool
+  after_create :create_default_pool, :add_score
 
   def create_default_pool
     pools.create(name: Pool::DEFAULT_POOL)
+  end
+
+  def add_score
+    scores.create(target: 'head', points: 4)
   end
 end

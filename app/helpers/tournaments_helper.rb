@@ -15,4 +15,13 @@ module TournamentsHelper
       both: 'Both'
     }
   end
+
+  def score_options
+    {
+      'arm' => 'Arm',
+      'head' => 'Head',
+      'leg' => 'Leg',
+      'torso' => 'Torso'
+    }
+  end
 end
