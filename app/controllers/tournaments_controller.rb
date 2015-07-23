@@ -57,6 +57,26 @@ class TournamentsController < ApplicationController
 
     render json: { success: success, message: message }
   end
+
+  def show_fighters
+    @tournament = Tournament.find(params[:id])
+    @fighters = @tournament.fighters
+  end
+
+  def add_fighter
+    @tournament = Tournament.find(params[:id])
+    first_name = params[:fighter][:first_name]
+    last_name = params[:fighter][:last_name]
+    @tournament.add_or_create_fighter(first_name, last_name)
+    redirect_to tournament_fighters_path(@tournament)
+  end
+
+  def remove_fighter
+    @tournament = Tournament.find(params[:id])
+    tournament_fighter = @tournament.tournament_fighters.find_by_fighter_id(params[:fighter_id])
+    tournament_fighter.destroy
+    redirect_to tournament_fighters_path(@tournament)
+  end
   
   private
 
