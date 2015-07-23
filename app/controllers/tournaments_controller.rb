@@ -65,8 +65,8 @@ class TournamentsController < ApplicationController
 
   def add_fighter
     @tournament = Tournament.find(params[:id])
-    first_name = params[:fighter][:first_name]
-    last_name = params[:fighter][:last_name]
+    first_name = params[:fighter][:first_name].strip
+    last_name = params[:fighter][:last_name].strip
     @tournament.add_or_create_fighter(first_name, last_name)
     redirect_to tournament_fighters_path(@tournament)
   end
