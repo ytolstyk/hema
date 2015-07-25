@@ -1,6 +1,9 @@
 <h1><%= @tournament.name %></h1>
 <div><a href="<%= tournament_pools_path @tournament %>">Show pools</a></div>
-<div><a href="<%= tournament_rules_path @tournament %>">Add/edit rules</a></div>
+<% if current_user %>
+  <div><a href="<%= tournament_rules_path @tournament %>">Add/edit rules</a></div>
+<% end %>
+<div><a href="<%= tournament_fighters_path @tournament %>">Fighters</a></div>
 <ul>
   <% @fighters.each do |fighter| %>
     <li><a href="<%= fighters_show_path fighter %>">
