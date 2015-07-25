@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :ensure_logged_in, only: [:create, :destroy]
+  before_action :ensure_logged_in, only: [:create, :destroy, :remove_fighter, :add_fighter]
 
   def show
     @tournament = Tournament.find(params[:id])
@@ -67,7 +67,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
     first_name = params[:fighter][:first_name].strip
     last_name = params[:fighter][:last_name].strip
-    @tournament.add_or_create_fighter(first_name, last_name)
+    flash[:notice] = @tournament.add_or_create_fighter(first_name, last_name)
     redirect_to tournament_fighters_path(@tournament)
   end
 
@@ -75,6 +75,10 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
     tournament_fighter = @tournament.tournament_fighters.find_by_fighter_id(params[:fighter_id])
     tournament_fighter.destroy
+
+    fighter = Fighter.find_by_id(params[:fighter_id])
+    flash[:notice] = "#{fighter.first_name} #{fighter.last_name} was removed" if fighter
+
     redirect_to tournament_fighters_path(@tournament)
   end
   

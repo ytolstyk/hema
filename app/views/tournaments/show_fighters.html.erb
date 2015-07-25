@@ -1,5 +1,11 @@
 <h1>Fighters</h1>
 
+<% if flash[:notice] %>
+  <div class="alert alert-info">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <% if current_user %>
   <form action="<%= tournaments_add_fighter_path(@tournament) %>" method="POST" role="form" id="addFighterForm">
     <%= render partial: 'partials/authenticity_token' %>
