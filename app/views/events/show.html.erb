@@ -4,7 +4,7 @@
   <% if current_user %>
     <li><a href="<%= add_tournament_path %>">Add Tournament</a></li>
   <% end %>
-  <% @tournaments.each do |tournament| %>
+  <% @event.tournaments.each do |tournament| %>
     <li><a href="<%= tournaments_show_path tournament %>">
       <%= tournament.name %>
     </a></li>

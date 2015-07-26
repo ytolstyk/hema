@@ -6,8 +6,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
-    @tournaments = @event.tournaments
+    @event = Event.includes(:tournaments).find(params[:id])
   end
 
   def new

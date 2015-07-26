@@ -21,7 +21,7 @@
 <% end %>
 
 <ul>
-  <% @fighters.each do |fighter| %>
+  <% @tournament.fighters.each do |fighter| %>
     <li>
       <%= fighter.first_name %> <%= fighter.last_name %>
       <% if current_user %>

@@ -29,8 +29,7 @@ class TournamentsController < ApplicationController
   end
 
   def add_rules
-    @tournament = Tournament.find(params[:id])
-    @scores = @tournament.scores
+    @tournament = Tournament.includes(:scores).find(params[:id])
   end
 
   def create_scores
@@ -57,8 +56,7 @@ class TournamentsController < ApplicationController
   end
 
   def show_fighters
-    @tournament = Tournament.find(params[:id])
-    @fighters = @tournament.fighters
+    @tournament = Tournament.includes(:fighters).find(params[:id])
   end
 
   def add_fighter
