@@ -7,7 +7,7 @@
     <%= render partial: 'partials/authenticity_token' %>
     <input type="hidden" name="tournament[id]" value="<%= @tournament.id %>">
 
-    <% @scores.each do |score| %>
+    <% @tournament.scores.each do |score| %>
       <%= render partial: 'new_score', locals: { selected_value: score.target, default_points: score.points } %>
     <% end %>
 
