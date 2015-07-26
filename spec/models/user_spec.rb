@@ -15,9 +15,7 @@ require 'spec_helper'
 describe User do
   context "validations" do
     before(:each) do
-      User.all.each do |user|
-        user.destroy
-      end
+      User.delete_all
     end
 
     it "validates username" do

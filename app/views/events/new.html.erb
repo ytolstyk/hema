@@ -1,40 +1,38 @@
-<div class="container">
-  <div class="event-form">
-    <% if flash[:errors] %>
-      <ul class="flash-errors">
-        <% flash[:errors].try(:each) do |error| %>
-          <li class="alert alert-danger"><%= error %></li>
-        <% end %>
-      </ul>
-    <% end %>
+<div class="event-form">
+  <% if flash[:errors] %>
+    <ul class="flash-errors">
+      <% flash[:errors].try(:each) do |error| %>
+        <li class="alert alert-danger"><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-    <h1>New Event</h1>
+  <h1>New Event</h1>
 
-    <form action="<%= events_create_path %>" method="POST" role="form">
-      <%= render partial: 'partials/authenticity_token' %>
+  <form action="<%= events_create_path %>" method="POST" role="form">
+    <%= render partial: 'partials/authenticity_token' %>
 
-      <div class="form-group">
-        <label>Name
-          <input type="text" name="event[name]" class="form-control" maxlength="200" value="<% @event.name %>" required>
-        </label>
-      </div>
-      <div class="form-group">
-        <label>Location
-          <input type="text" name="event[location]" class="form-control" maxlength="200" value="<% @event.location %>">
-        </label>
-      </div>
-      <div class="form-group">
-        <label>Start Date
-          <input type="date" name="event[date]" class="form-control" value="<% @event.date %>">
-        </label>
-      </div>
-      <div class="form-group">
-        <label>Organizer
-          <input type="text" name="event[organizer]" class="form-control" maxlength="200" value="<% @event.organizer %>">
-        </label>
-      </div>
+    <div class="form-group">
+      <label>Name
+        <input type="text" name="event[name]" class="form-control" maxlength="200" value="<% @event.name %>" required>
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Location
+        <input type="text" name="event[location]" class="form-control" maxlength="200" value="<% @event.location %>">
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Start Date
+        <input type="date" name="event[date]" class="form-control" value="<% @event.date %>">
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Organizer
+        <input type="text" name="event[organizer]" class="form-control" maxlength="200" value="<% @event.organizer %>">
+      </label>
+    </div>
 
-      <button class="btn btn-primary sign-in-button">Create</button>
-    </form>
-  </div>
+    <button class="btn btn-primary sign-in-button">Create</button>
+  </form>
 </div>

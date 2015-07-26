@@ -14,9 +14,7 @@ require 'spec_helper'
 describe MatchFighter do
   context "validations" do
     before(:each) do
-      MatchFighter.all.each do |match_fighter|
-        match_fighter.destroy
-      end
+      MatchFighter.delete_all
     end
 
     it "should require fighter_id" do

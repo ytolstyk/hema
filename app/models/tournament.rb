@@ -24,9 +24,25 @@ class Tournament < ActiveRecord::Base
     source: :fighter
   has_many :pools, dependent: :destroy
 
-  after_create :create_default_pool
+  after_create :create_default_pool, :add_score
 
   def create_default_pool
     pools.create(name: Pool::DEFAULT_POOL)
+  end
+
+  def add_score
+    scores.create(target: 'head', points: 4)
+  end
+
+  def add_or_create_fighter(first_name, last_name)
+    fighter = Fighter.where(first_name: first_name, last_name: last_name)
+
+    if fighter.empty?
+      fighters.create(first_name: first_name, last_name: last_name)
+      "#{first_name} #{last_name} created and added"
+    else
+      tournament_fighters.create(fighter_id: fighter.first.id)
+      "#{first_name} #{last_name} added"
+    end
   end
 end

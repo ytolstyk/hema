@@ -14,9 +14,7 @@ require 'spec_helper'
 describe PoolFighter do
   context "validations" do
     before(:each) do
-      PoolFighter.all.each do |pool_fighter|
-        pool_fighter.destroy
-      end
+      PoolFighter.delete_all
     end
 
     it "validates fighter_id" do

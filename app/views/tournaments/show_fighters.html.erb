@@ -1,0 +1,36 @@
+<h1>Fighters</h1>
+
+<% if flash[:notice] %>
+  <div class="alert alert-info">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<% if current_user %>
+  <form action="<%= tournaments_add_fighter_path(@tournament) %>" method="POST" role="form" id="addFighterForm">
+    <%= render partial: 'partials/authenticity_token' %>
+
+    <div class="form-group tournaments-show-fighters">
+      <label>First name<input type="text" name="fighter[first_name]" id="firstName" class="form-control"></label>
+      <label>Last name<input type="text" name="fighter[last_name]" id="lastName" class="form-control"></label>
+      <button class="btn btn-primary sign-in-button">Add</button>
+
+      <ul class="tournaments-show-fighters-typeahead-container"></ul>
+    </div>
+  </form>
+<% end %>
+
+<ul>
+  <% @fighters.each do |fighter| %>
+    <li>
+      <%= fighter.first_name %> <%= fighter.last_name %>
+      <% if current_user %>
+        <form action="<%= tournaments_remove_fighter_path(@tournament, fighter_id: fighter.id) %>" class="delete-form-button" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <input class="btn btn-small" type="submit" value="X">
+          <%= render partial: 'partials/authenticity_token' %>
+        </form>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
