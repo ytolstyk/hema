@@ -2,11 +2,10 @@ class PoolsController < ApplicationController
   before_action :ensure_logged_in, only: [:create, :destroy]
 
   def create
-    name = "Pool #{Tournament.find(pool_params[:tournament_id]).pools.count + 1}"
-    @pool = Pool.create(name: name, tournament_id: pool_params[:tournament_id])
-    if !@pool.save
-      flash[:errors] = @pool.errors.full_messages
-    end
+    @pool = Pool.new(name: 'New pool', tournament_id: pool_params[:tournament_id])
+    @pool.name_pool Tournament.find(pool_params[:tournament_id]).pools.count
+
+    flash[:errors] = @pool.errors.full_messages if !@pool.save
 
     redirect_to tournament_pools_path(@pool.tournament_id)
   end
@@ -18,8 +17,7 @@ class PoolsController < ApplicationController
       return
     end
 
-    @pool.reassign_fighters Pool::DEFAULT_POOL
-    @pool.destroy
+    @pool.remove_pool
     redirect_to tournament_pools_path(@pool.tournament_id)
   end
 

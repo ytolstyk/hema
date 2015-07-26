@@ -10,7 +10,7 @@
 #
 
 class Pool < ActiveRecord::Base
-  validates :tournament_id, presence: true
+  validates :tournament_id, :name, presence: true
   belongs_to :tournament
   has_many :matches
   has_many :pool_fighters,
@@ -23,15 +23,28 @@ class Pool < ActiveRecord::Base
 
   DEFAULT_POOL = 'Unassigned'
 
+  def remove_pool
+    return if name == Pool::DEFAULT_POOL
+    reassign_fighters Pool::DEFAULT_POOL
+    pool_number = get_pool_number
+    tournament = Tournament.find(tournament_id)
+    tournament.pools.each do |pool|
+      if pool.get_pool_number > pool_number
+        pool.name_pool pool.get_pool_number - 1
+      end
+    end
+    destroy
+  end
+
   def reassign_fighters(pool_name)
     return if fighters.count == 0
     
     tournament = Tournament.find(tournament_id)
     new_pool = tournament.pools.find_by_name(pool_name)
     new_pool = tournament.pools.create(name: DEFAULT_POOL) if new_pool.nil?
-    self.fighters.each do |fighter|
+    fighters.each do |fighter|
       new_pool.pool_fighters.create(fighter_id: fighter.id)
-      self.fighters.delete(fighter)
+      fighters.delete(fighter)
     end
   end
 
@@ -43,5 +56,14 @@ class Pool < ActiveRecord::Base
         match.match_fighters.create(fighter_id: fighter)
       end
     end
+  end
+
+  def name_pool(new_pool_id)
+    update(name: "Pool #{new_pool_id}")
+  end
+  
+  def get_pool_number
+    return -1 if name == Pool::DEFAULT_POOL
+    name.split(' ').last.to_i
   end
 end

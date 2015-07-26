@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :ensure_logged_in, only: [:create, :destroy, :remove_fighter, :add_fighter]
+  before_action :ensure_logged_in, only: [:create, :destroy, :remove_fighter, :add_fighter, :tournament_pools]
 
   def show
     @tournament = Tournament.find(params[:id])
@@ -25,9 +25,7 @@ class TournamentsController < ApplicationController
   end
 
   def tournament_pools
-    @tournament = Tournament.find(params[:id])
-    @fighters = @tournament.fighters
-    @pools = @tournament.pools
+    @tournament = Tournament.includes(:fighters, :pools, { pools: :fighters }).find(params[:id])
   end
 
   def add_rules

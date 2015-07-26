@@ -16,8 +16,8 @@ gem "bootstrap-sass", "~> 3.2.0"
 gem "bcrypt"
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
-gem "jquery-ui-sass-rails"
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '>= 5.0'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'rspec-rails'
