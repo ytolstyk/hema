@@ -1,5 +1,5 @@
 <%= javascript_include_tag 'tournaments/add_rules' %>
-<h1><a href="<%= events_show_path @tournament.event_id %>"><%=Event.find(@tournament.event_id).name %></a></h1>
+<h1><a href="<%= events_show_path @tournament.event_id %>"><%= @tournament.event.name %></a></h1>
 <h2><a href="<%= tournaments_show_path @tournament.id %>"><%= @tournament.name %></a></h2>
 <div class="tournaments-add-rules">
   <h1>Rules</h1>
