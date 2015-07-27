@@ -8,7 +8,6 @@ hema.Tournaments.Pools = function(poolsSelector, fightersSelector, saveSelector,
   this.$alert = $(alertSelector);
   this.sortable(fightersSelector);
   this.savePath = this.$saveButton.data('path');
-  this.tournamentId = this.$saveButton.data('tournament');
   this.assignListeners();
 };
 
