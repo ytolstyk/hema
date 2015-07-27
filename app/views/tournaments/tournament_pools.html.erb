@@ -1,6 +1,7 @@
 <%= javascript_include_tag 'tournaments/tournament_pools' %>
 
-<h1><%= @tournament.name %></h1>
+<h1><a href="<%= events_show_path @tournament.event_id %>"><%=Event.find(@tournament.event_id).name %></a></h1>
+<h2><a href="<%= tournaments_show_path @tournament.id %>"><%= @tournament.name %></a></h2>
 <ul>
   <% @tournament.pools.each do |pool| %>
     <li>

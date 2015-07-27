@@ -1,4 +1,6 @@
-<h1>Fighters</h1>
+<h1><a href="<%= events_show_path @tournament.event_id %>"><%=Event.find(@tournament.event_id).name %></a></h1>
+<h2><a href="<%= tournaments_show_path @tournament.id %>"><%= @tournament.name %></a></h2>
+<h3>Fighters</h3>
 
 <% if flash[:notice] %>
   <div class="alert alert-info">
