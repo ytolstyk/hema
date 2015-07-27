@@ -1,9 +1,9 @@
 <%= javascript_include_tag 'tournaments/tournament_pools' %>
 
 <h1><%= @tournament.name %></h1>
-<ul>
+<ul class='tournament-pools-list'>
   <% @tournament.pools.each do |pool| %>
-    <li>
+    <li class='tournament-pools-item' data-pool="<%= pool.id %>">
       <%= pool.name %>
       <% if pool.name != Pool::DEFAULT_POOL && current_user %>
         <form action="<%= pools_destroy_path(pool) %>" class="event-delete-form" method="post">
@@ -14,7 +14,7 @@
       <% end %>
       <ul class='tournament-pool-fighters-sortable'>
         <% pool.fighters.each do |fighter| %>
-          <li>
+          <li class='tournament-pools-fighter-item' data-fighter="<%= fighter.id %>">
             <%= fighter.first_name %> <%= fighter.last_name %>
           </li>
         <% end %>
@@ -24,9 +24,14 @@
 </ul>
 
 <% if current_user %>
-  <form action="<%= pools_create_path %>" method="POST" role="form">
+  <form action="<%= pools_create_path %>" method="POST" role="form" class="add-pool-button">
     <%= render partial: 'partials/authenticity_token' %>
     <input type="hidden" name="pool[tournament_id]" value="<%= @tournament.id %>">
-    <button class="btn btn-primary sign-in-button">Add pool</button>
+    <button class="btn btn-primary">Add pool</button>
   </form>
+
+  <button type='button' class='btn btn-primary save-pools-button'
+          data-path="<%= tournaments_save_pools_path @tournament.id %>"
+          data-tournament="<%= @tournament.id %>">Save</button>
+  <span class="alert alert-info tournament-pools-alert alert-hidden"></span>
 <% end %> 

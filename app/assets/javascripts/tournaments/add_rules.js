@@ -1,7 +1,7 @@
 var hema = hema || {};
 hema.Tournaments = hema.Tournaments || {};
 
-hema.Tournaments.addRules = function(submitSelector, addMoreSelector, ruleSelector, rulesFormSelector, removeRuleSelector) {
+hema.Tournaments.AddRules = function(submitSelector, addMoreSelector, ruleSelector, rulesFormSelector, removeRuleSelector) {
   this.$submitButton = $(submitSelector);
   this.$addMoreLink = $(addMoreSelector);
   this.ruleSelector = ruleSelector;
@@ -92,7 +92,7 @@ hema.Tournaments.addRules.prototype.handleError = function(data) {
 };
 
 $(function() {
-  var rules = new hema.Tournaments.addRules('.tournaments-submit-rules-button',
+  var rules = new hema.Tournaments.AddRules('.tournaments-submit-rules-button',
     '.tournaments-rules-add-more', '.tournament-rule', '.tournaments-add-rules-form',
     '.tournament-rule-remove');
   rules.initialize();

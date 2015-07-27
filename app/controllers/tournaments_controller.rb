@@ -77,6 +77,25 @@ class TournamentsController < ApplicationController
 
     redirect_to tournament_fighters_path(@tournament)
   end
+
+  def save_pools
+    @tournament = Tournament.includes(:pools, { pools: :pool_fighters }).find(params[:id])
+    success = true
+    message = "Pools saved"
+
+    params[:pools].each do |key, pool|
+      current_pool = @tournament.pools.find(pool[:id])
+      current_pool.pool_fighters.delete_all
+      current_fighters = []
+      pool[:fighters].try(:each) do |fighter|
+        current_fighters << { fighter_id: fighter }
+      end
+
+      current_pool.pool_fighters.create(current_fighters)
+    end
+
+    render json: { success: success, message: message }
+  end
   
   private
 
