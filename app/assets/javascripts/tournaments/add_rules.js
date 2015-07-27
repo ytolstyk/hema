@@ -12,11 +12,11 @@ hema.Tournaments.AddRules = function(submitSelector, addMoreSelector, ruleSelect
   this.$formAlerts = $(this.$rulesForm.find('.tournaments-form-alert'));
 };
 
-hema.Tournaments.addRules.prototype.initialize = function() {
+hema.Tournaments.AddRules.prototype.initialize = function() {
   this.addListeners();
 };
 
-hema.Tournaments.addRules.prototype.addListeners = function() {
+hema.Tournaments.AddRules.prototype.addListeners = function() {
   var removeRule = $(this.removeRuleSelector);
   this.$submitButton.on('click', this.sendForm.bind(this));
   this.$rulesForm.on('submit', this.submitForm.bind(this));
@@ -24,7 +24,7 @@ hema.Tournaments.addRules.prototype.addListeners = function() {
   removeRule.on('click', this.removeRule.bind(this));
 };
 
-hema.Tournaments.addRules.prototype.sendForm = function(event) {
+hema.Tournaments.AddRules.prototype.sendForm = function(event) {
   event.preventDefault();
   this.clearMessages();
 
@@ -37,17 +37,17 @@ hema.Tournaments.addRules.prototype.sendForm = function(event) {
   })
 };
 
-hema.Tournaments.addRules.prototype.clearMessages = function() {
+hema.Tournaments.AddRules.prototype.clearMessages = function() {
   $.each(this.$formAlerts, function(index, alert) {
     $(alert).text('').addClass('tournaments-form-alert-hidden');
   });
 };
 
-hema.Tournaments.addRules.prototype.submitForm = function(event) {
+hema.Tournaments.AddRules.prototype.submitForm = function(event) {
   event.preventDefault();
 };
 
-hema.Tournaments.addRules.prototype.addMore = function(event) {
+hema.Tournaments.AddRules.prototype.addMore = function(event) {
   event.preventDefault();
   this.clearMessages();
   var $ruleClone = this.$newRule.clone();
@@ -55,7 +55,7 @@ hema.Tournaments.addRules.prototype.addMore = function(event) {
   $ruleClone.find(this.removeRuleSelector).on('click', this.removeRule.bind(this));
 };
 
-hema.Tournaments.addRules.prototype.removeRule = function(event) {
+hema.Tournaments.AddRules.prototype.removeRule = function(event) {
   event.preventDefault();
   this.clearMessages();
   if ($(this.ruleSelector).length < 2) {
@@ -66,7 +66,7 @@ hema.Tournaments.addRules.prototype.removeRule = function(event) {
   $link.parent().remove();
 };
 
-hema.Tournaments.addRules.prototype.payload = function() {
+hema.Tournaments.AddRules.prototype.payload = function() {
   var payload = { scores: [] };
   $.each($(this.ruleSelector), function(index, rule) {
     payload.scores.push({ target: $($(rule).find('.tournament-rule-target option:selected')).val(),
@@ -76,7 +76,7 @@ hema.Tournaments.addRules.prototype.payload = function() {
   return payload;
 };
 
-hema.Tournaments.addRules.prototype.handleSuccess = function(data) {
+hema.Tournaments.AddRules.prototype.handleSuccess = function(data) {
   if (data.success !== true) {
     this.handleError();
     return;
@@ -86,7 +86,7 @@ hema.Tournaments.addRules.prototype.handleSuccess = function(data) {
   $alert.text("Saved!").removeClass('tournaments-form-alert-hidden');
 };
 
-hema.Tournaments.addRules.prototype.handleError = function(data) {
+hema.Tournaments.AddRules.prototype.handleError = function(data) {
   var $alert = $(this.$formAlerts.filter('.alert-danger'));
   $alert.text("There was a problem saving the info. Refresh the page and try again.").removeClass('tournaments-form-alert-hidden');
 };
