@@ -6,7 +6,7 @@
   <li>Match <%= index %>
     <ul>
       <% match.fighters.each do |fighter| %>
-      <li> <%= fighter.name %> </li>
+      <li><%= fighter.first_name %> <%= fighter.last_name %></li>
       <% end %>
     </ul>
   </li>
