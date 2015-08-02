@@ -5,7 +5,7 @@ default: &default
   encoding: unicode
   timeout: 5000
   host: localhost
-  username: yuriytolstykh
+  username: azizoval
 
 development:
   <<: *default

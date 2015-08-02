@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704180941) do
+ActiveRecord::Schema.define(version: 20150802213507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20150704180941) do
     t.boolean  "afterblow",  null: false
     t.boolean  "double_hit", null: false
     t.integer  "penalty"
-    t.integer  "fighter_id"
+    t.integer  "fighter_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20150704180941) do
   add_index "matches", ["pool_id"], name: "index_matches_on_pool_id", using: :btree
 
   create_table "pool_fighters", force: true do |t|
-    t.integer  "pool_id"
-    t.integer  "fighter_id"
+    t.integer  "pool_id",    null: false
+    t.integer  "fighter_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20150704180941) do
 
   create_table "pools", force: true do |t|
     t.string   "name"
-    t.integer  "tournament_id"
+    t.integer  "tournament_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

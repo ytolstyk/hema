@@ -8,7 +8,7 @@
 #  afterblow  :boolean          not null
 #  double_hit :boolean          not null
 #  penalty    :integer
-#  fighter_id :integer
+#  fighter_id :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
 #

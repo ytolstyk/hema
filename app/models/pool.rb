@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  name          :string(255)
-#  tournament_id :integer
+#  tournament_id :integer          not null
 #  created_at    :datetime
 #  updated_at    :datetime
 #
