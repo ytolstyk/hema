@@ -5,7 +5,7 @@
 <ul class='tournament-pools-list'>
   <% @tournament.pools.each do |pool| %>
     <li class='tournament-pools-item' data-pool="<%= pool.id %>">
-      <%= pool.name %>
+      <a href="<%= pool_matches_path pool.id %>"><%= pool.name %></a>
       <% if pool.name != Pool::DEFAULT_POOL && current_user %>
         <form action="<%= pools_destroy_path(pool) %>" class="event-delete-form" method="post">
           <input name="_method" type="hidden" value="delete">

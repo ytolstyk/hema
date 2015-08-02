@@ -21,6 +21,10 @@ class PoolsController < ApplicationController
     redirect_to tournament_pools_path(@pool.tournament_id)
   end
 
+  def pool_matches
+    @pool = Pool.includes(:matches, { matches: :fighters }).find(params[:id])
+  end
+
   private
 
   def pool_params

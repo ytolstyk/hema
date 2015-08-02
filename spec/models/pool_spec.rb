@@ -19,7 +19,7 @@ describe Pool do
     end
 
     it "should create a new pool with tournament_id" do
-      pool = Pool.create(tournament_id: 1)
+      pool = Pool.create(tournament_id: 1, name: 'test name')
       pool.errors.full_messages.length.should == 0
     end
   end
