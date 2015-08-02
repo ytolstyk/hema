@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     post 'create' => :create, as: :tournaments_create
     post ':id/add_fighter' => :add_fighter, as: :tournaments_add_fighter
     post ':id/create_scores' => :create_scores, as: :tournaments_create_scores
+    post ':id/save_pools' => :save_pools, as: :tournaments_save_pools
     delete ':id/remove_fighter' => :remove_fighter, as: :tournaments_remove_fighter
     delete ':id' => :destroy, as: :tournaments_destroy
   end
