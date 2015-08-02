@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   scope 'pools', controller: 'pools' do
+    get ':id/matches' => :pool_matches, as: :pool_matches
     post 'create' => :create, as: :pools_create
     delete ':id' => :destroy, as: :pools_destroy
   end
