@@ -15,7 +15,8 @@ class Match < ActiveRecord::Base
   has_many :match_fighters,
     class_name: 'MatchFighter',
     primary_key: :id,
-    foreign_key: :match_id
+    foreign_key: :match_id,
+    dependent: :destroy
   has_many :fighters,
     through: :match_fighters,
     source: :fighter

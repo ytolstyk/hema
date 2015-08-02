@@ -53,7 +53,7 @@ class Pool < ActiveRecord::Base
     matches_array.each do |fighter_pair|
       match = matches.create
       fighter_pair.each do |fighter|
-        match.match_fighters.create(fighter_id: fighter)
+        match.match_fighters.create(fighter_id: fighter.fighter_id)
       end
     end
   end
