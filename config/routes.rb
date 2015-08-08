@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   scope :static do
   end
-  
+
   scope 'events', controller: 'events' do
     root to: :index, as: :events_index
     get 'new' => :new, as: :events_new
