@@ -36,6 +36,16 @@ Rails.application.routes.draw do
     get ':id' => :show, as: :fighters_show
   end
 
+  scope 'matches', controller: 'matches' do
+    get ':id' => :show, as: :matches_show
+  end
+
+  scope 'exchanges', controller: 'exchanges' do
+    get ':match_id/new' => :new, as: :exchanges_new
+    get ':id' => :show, as: :exchanges_show
+    post ':match_id/create' => :create, as: :exchanges_create
+  end
+
   scope 'users', controller: 'users' do
     root to: :index, as: :users_index
     get 'new' => :new, as: :users_new
