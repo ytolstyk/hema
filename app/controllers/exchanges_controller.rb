@@ -1,4 +1,6 @@
 class ExchangesController < ApplicationController
+  before_action :ensure_logged_in, only: [:new, :create]
+
   def new
     @match = Match.includes(pool: :tournament).find_by_id(params[:match_id])
     @exchange = @match.exchanges.new
