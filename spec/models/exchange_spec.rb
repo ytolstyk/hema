@@ -33,7 +33,7 @@ describe Exchange do
     end
 
     it "should create exchange if all fields present" do
-      exchange = Exchange.create(afterblow: true, double_hit: true, match_id: 1)
+      exchange = Exchange.create(afterblow: true, double_hit: true, match_id: 1, fighter_id: 1)
       exchange.errors.full_messages.length.should == 0
     end
   end
