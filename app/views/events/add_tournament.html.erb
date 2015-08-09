@@ -10,7 +10,7 @@
 
   <h1>New Tournament</h1>
 
-  <form action="<%= tournaments_create_path @match.id %>" method="POST" role="form">
+  <form action="<%= tournaments_create_path %>" method="POST" role="form">
     <%= render partial: 'partials/authenticity_token' %>
     <input type="hidden" name="tournament[event_id]" value="<%= @event.id %>">
 
