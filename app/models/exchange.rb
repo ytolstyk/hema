@@ -14,6 +14,14 @@
 #
 
 class Exchange < ActiveRecord::Base
-  validates :match_id, :afterblow, :double_hit, :fighter_id, presence: true
+  validates :match_id, :fighter_id, presence: true
   belongs_to :match
+
+  before_create :fill_boolean_fields
+  before_save :fill_boolean_fields
+
+  def fill_boolean_fields
+    self.afterblow ||= 'false'
+    self.double_hit ||= 'false'
+  end
 end

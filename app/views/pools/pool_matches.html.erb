@@ -3,7 +3,7 @@
 <h3><%= @pool.name %></h3>
 <ul>
 <% @pool.matches.each_with_index do |match, index| %>
-  <li>Match <%= index %>
+  <li><a href="<%= matches_show_path match.id %>">Match <%= index + 1 %></a>
     <ul>
       <% match.fighters.each do |fighter| %>
       <li><%= fighter.first_name %> <%= fighter.last_name %></li>

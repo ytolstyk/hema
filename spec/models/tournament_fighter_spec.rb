@@ -15,10 +15,12 @@ describe TournamentFighter do
   context "validations" do
     before(:each) do
       TournamentFighter.delete_all
+      Tournament.delete_all
+      Tournament.create(name: 'test', event_id: 1, weapon_type: 'long sword')
     end
 
     it "validates fighter_id" do
-      tournament_fighter = TournamentFighter.create(tournament_id: 1)
+      tournament_fighter = TournamentFighter.create(tournament_id: Tournament.first.id)
       tournament_fighter.errors.full_messages.length.should > 0
     end
 
@@ -28,14 +30,14 @@ describe TournamentFighter do
     end
 
     it "validates uniqueness of tournament_id/fighter_id pair" do
-      tournament_fighter = TournamentFighter.create(fighter_id: 1, tournament_id: 1)
-      tournament_fighter_with_errors = TournamentFighter.create(fighter_id: 1, tournament_id: 1)
+      tournament_fighter = TournamentFighter.create(fighter_id: 1, tournament_id: Tournament.first.id)
+      tournament_fighter_with_errors = TournamentFighter.create(fighter_id: 1, tournament_id: Tournament.first.id)
       tournament_fighter.errors.full_messages.length.should == 0
       tournament_fighter_with_errors.errors.full_messages.length.should > 0
     end
 
     it "creates tournament_fighter if required fields exist" do
-      tournament_fighter = TournamentFighter.create(fighter_id: 1, tournament_id: 1)
+      tournament_fighter = TournamentFighter.create(fighter_id: 1, tournament_id: Tournament.first.id)
       tournament_fighter.errors.full_messages.length.should == 0
     end
   end

@@ -12,7 +12,7 @@
 
   <form action="<%= tournaments_create_path %>" method="POST" role="form">
     <%= render partial: 'partials/authenticity_token' %>
-    <input type="hidden" name="tournament[event_id]" value="<%= @event.id %>"
+    <input type="hidden" name="tournament[event_id]" value="<%= @event.id %>">
 
     <div class="form-group">
       <label>Name

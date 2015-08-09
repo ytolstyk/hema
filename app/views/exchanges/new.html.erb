@@ -1,0 +1,57 @@
+<h1><a href="<%= matches_show_path @match.id %>">Match</a></h1>
+
+<% if flash[:errors] %>
+  <ul class="flash-errors">
+    <% flash[:errors].try(:each) do |error| %>
+      <li class="alert alert-danger"><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form action="<%= exchanges_create_path @match.id %>" method="POST" role="form">
+  <%= render partial: 'partials/authenticity_token' %>
+  <input type="hidden" name="tournament_id" value="<%= @match.pool.tournament.id %>">
+
+  <div class="form-group">
+    <label class="form-control">
+      <input type="radio" name="exchange[fighter_id]" value="<%= @match.fighters.first.id %>">
+      <%= @match.fighters.first.first_name %> <%= @match.fighters.first.last_name %>
+    </label>
+    <label class="form-control">
+      <input type="radio" name="exchange[fighter_id]" value="<%= @match.fighters.last.id %>">
+      <%= @match.fighters.last.first_name %> <%= @match.fighters.last.last_name %>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>Target
+      <select name="exchange[target]" class="form-control">
+        <% @match.pool.tournament.scores.each do |score| %>
+          <option value="<%= score.target %>"><%= score.target %> - <%= score.points %></option>
+        <% end %>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control">
+      <input type="checkbox" name="exchange[afterblow]" value="true">
+      Afterblow
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control">
+      <input type="checkbox" name="exchange[double_hit]" value="true">
+      Double Hit
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>Penalty
+      <input type="number" min="0" maxlength="10" name="exchange[penalty]" class="form-control">
+    </label>
+  </div>
+
+  <button class="btn btn-primary sign-in-button">Create</button>
+</form>
