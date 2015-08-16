@@ -11,5 +11,7 @@
 #
 
 class MatchInfo < ActiveRecord::Base
-  belongs_to :match
+  validates :match_id, presence: true
+
+  belongs_to :match, dependent: :destroy
 end
