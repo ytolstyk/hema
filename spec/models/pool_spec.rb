@@ -50,6 +50,7 @@ describe Pool do
       pool.fighters.create(first_name: "BB", last_name: "BBB")
       pool.fighters.create(first_name: "CC", last_name: "CCC")
       pool.fighters.create(first_name: "DD", last_name: "DDD")
+      Match.any_instance.stub(:create_match_info)
     end
 
     it 'should create six matches' do

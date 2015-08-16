@@ -11,6 +11,7 @@
 #  fighter_id :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
+#  seconds    :integer          not null
 #
 
 require 'spec_helper'
@@ -33,7 +34,7 @@ describe Exchange do
     end
 
     it "should create exchange if all fields present" do
-      exchange = Exchange.create(afterblow: true, double_hit: true, match_id: 1, fighter_id: 1)
+      exchange = Exchange.create(afterblow: true, double_hit: true, match_id: 1, fighter_id: 1, seconds: 12)
       exchange.errors.full_messages.length.should == 0
     end
   end

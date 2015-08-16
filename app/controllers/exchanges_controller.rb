@@ -25,6 +25,6 @@ class ExchangesController < ApplicationController
   private
 
   def exchange_params
-    params.require(:exchange).permit(:target, :afterblow, :double_hit, :penalty, :fighter_id)
+    params.require(:exchange).permit(:target, :afterblow, :double_hit, :seconds, :penalty, :fighter_id)
   end
 end
