@@ -20,4 +20,23 @@ class Match < ActiveRecord::Base
   has_many :fighters,
     through: :match_fighters,
     source: :fighter
+  has_one :match_info
+
+  after_create :create_match_info
+
+  def create_match_info
+    match_info.create
+  end
+
+  def completed?
+    match_info.match_completed
+  end
+
+  def started?
+    match_info.match_started
+  end
+
+  def elapsed_time
+    exchanges.pluck(:seconds).max
+  end
 end

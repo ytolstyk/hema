@@ -12,6 +12,10 @@ require 'spec_helper'
 
 describe Match do
   context "create" do
+    before(:each) do
+      Match.any_instance.stub(:create_match_info)
+    end
+
     it "should validate pool_id" do
       match = Match.create
       match.errors.full_messages.length.should > 0
@@ -38,6 +42,10 @@ describe Match do
 
     it "should have many fighters" do
       Match.reflect_on_association(:fighters).macro.should == :has_many
+    end
+
+    it "should have many fighters" do
+      Match.reflect_on_association(:match_info).macro.should == :has_one
     end
   end
 end

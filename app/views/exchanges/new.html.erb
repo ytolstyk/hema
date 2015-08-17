@@ -35,6 +35,14 @@
 
   <div class="form-group">
     <label class="form-control">
+      Seconds
+      <input type="number" min="<%= @match.elapsed_time %>" maxlength="10"
+             name="exchange[seconds]" value="<%= @match.elapsed_time %>">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control">
       <input type="checkbox" name="exchange[afterblow]" value="true">
       Afterblow
     </label>
