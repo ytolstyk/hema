@@ -83,16 +83,10 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.includes(:pools, { pools: :pool_fighters }).find(params[:id])
     success = true
     message = "Pools saved"
-
     params[:pools].each do |key, pool|
       current_pool = @tournament.pools.find(pool[:id])
-      current_pool.pool_fighters.delete_all
-      current_fighters = []
-      pool[:fighters].try(:each) do |fighter|
-        current_fighters << { fighter_id: fighter }
-      end
-
-      current_pool.pool_fighters.create(current_fighters)
+      new_pool_fighters = pool[:fighters] || []
+      current_pool.update_pool new_pool_fighters
     end
 
     render json: { success: success, message: message }
