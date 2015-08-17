@@ -50,8 +50,8 @@ class Pool < ActiveRecord::Base
 
   def remove_fighter(fighter_id)
     pool_fighters_to_delete = pool_fighters.where('fighter_id = ?', fighter_id)
-    pool_fighters_to_delete.each do |pf|
-      pf.destroy
+    pool_fighters_to_delete.each do |pool_fighter|
+      pool_fighter.destroy
     end
   end
 
