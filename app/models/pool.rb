@@ -48,6 +48,27 @@ class Pool < ActiveRecord::Base
     end
   end
 
+  def remove_fighter(fighter_id)
+    pool_fighters_to_delete = pool_fighters.where('fighter_id = ?', fighter_id)
+    pool_fighters_to_delete.each do |pf|
+      pf.destroy
+    end
+  end
+
+  def add_fighter(fighter_id)
+    pool_fighters.create(fighter_id: fighter_id)
+    generate_match fighter_id
+  end
+
+  def generate_match(fighter_id)
+    pool_fighters.each do |fighter|
+      next if fighter_id.to_i == fighter.fighter_id.to_i
+      match = matches.create
+      match.match_fighters.create(fighter_id: fighter.fighter_id)
+      match.match_fighters.create(fighter_id: fighter_id)
+    end
+  end
+
   def generate_matches
     matches_array = pool_fighters.combination(2).to_a
     matches_array.each do |fighter_pair|
