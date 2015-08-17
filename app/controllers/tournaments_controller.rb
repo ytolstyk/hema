@@ -85,20 +85,8 @@ class TournamentsController < ApplicationController
     message = "Pools saved"
     params[:pools].each do |key, pool|
       current_pool = @tournament.pools.find(pool[:id])
-      current_pool_fighters = current_pool.fighters.pluck(:id) || []
       new_pool_fighters = pool[:fighters] || []
-
-      current_pool_fighters.each do |fighter_id|
-        if !new_pool_fighters.include? fighter_id
-          current_pool.remove_fighter fighter_id
-        end
-      end
-
-      new_pool_fighters.try(:each) do |fighter_id|
-        if !current_pool_fighters.include? fighter_id
-          current_pool.add_fighter fighter_id
-        end
-      end
+      current_pool.update_pool new_pool_fighters
     end
 
     render json: { success: success, message: message }

@@ -79,6 +79,20 @@ class Pool < ActiveRecord::Base
     end
   end
 
+  def update_pool(fighter_list)
+    fighters.each do |fighter_id|
+      if !fighter_list.include? fighter_id
+        remove_fighter fighter_id
+      end
+    end
+
+    fighter_list.try(:each) do |fighter_id|
+      if !fighters.include? fighter_id
+        add_fighter fighter_id
+      end
+    end
+  end
+
   def name_pool(new_pool_id)
     update(name: "Pool #{new_pool_id}")
   end
