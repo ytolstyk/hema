@@ -45,4 +45,9 @@ class Tournament < ActiveRecord::Base
       "#{first_name} #{last_name} added"
     end
   end
+
+  def remove_fighter(fighter_id)
+    tournament_fighters.find_by_fighter_id(fighter_id).destroy
+    pools.each { |pool| pool.remove_fighter(fighter_id) }
+  end
 end

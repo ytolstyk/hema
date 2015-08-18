@@ -70,8 +70,7 @@ class TournamentsController < ApplicationController
 
   def remove_fighter
     @tournament = Tournament.find(params[:id])
-    tournament_fighter = @tournament.tournament_fighters.find_by_fighter_id(params[:fighter_id])
-    tournament_fighter.destroy
+    @tournament.remove_fighter(params[:fighter_id])
 
     fighter = Fighter.find_by_id(params[:fighter_id])
     flash[:notice] = "#{fighter.first_name} #{fighter.last_name} was removed" if fighter

@@ -12,6 +12,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  seconds    :integer          not null
+#  points     :integer
 #
 
 require 'spec_helper'
