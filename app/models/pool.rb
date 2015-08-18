@@ -23,6 +23,10 @@ class Pool < ActiveRecord::Base
 
   DEFAULT_POOL = 'Unassigned'
 
+  def self.all_tournament_fighters(tournament_id)
+    Pool.where(tournament_id: tournament_id).map(&:fighters).flatten
+  end
+
   def remove_pool
     return if name == Pool::DEFAULT_POOL
     reassign_fighters Pool::DEFAULT_POOL
@@ -102,14 +106,22 @@ class Pool < ActiveRecord::Base
     name.split(' ').last.to_i
   end
 
-  def add_or_create_fighter(first_name, last_name)
+  def add_or_create_fighter(tournament_id, first_name, last_name)
     fighter = Fighter.where(first_name: first_name, last_name: last_name)
 
     if fighter.empty?
       fighters.create(first_name: first_name, last_name: last_name)
       "#{first_name} #{last_name} created and added"
     else
-      pool_fighters.create(fighter_id: fighter.first.id)
+      add_existing_fighter(tournament_id, fighter.first)
+    end
+  end
+
+  def add_existing_fighter(tournament_id, fighter)
+    if self.class.all_tournament_fighters(tournament_id).include?(fighter)
+      "#{fighter.first_name} #{fighter.last_name} is already in the tournament"
+    else
+      pool_fighters.create(fighter_id: fighter.id)
       "#{first_name} #{last_name} added"
     end
   end

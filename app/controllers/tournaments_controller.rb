@@ -56,7 +56,7 @@ class TournamentsController < ApplicationController
   end
 
   def show_fighters
-    @tournament = Tournament.includes({ pools: :fighters }).find(params[:id])
+    @tournament = Tournament.includes({ pools: :fighters }, { pools: :pool_fighters }, :event).find(params[:id])
   end
 
   def add_fighter
@@ -64,7 +64,7 @@ class TournamentsController < ApplicationController
     @pool = @tournament.pools.find_by_name(Pool::DEFAULT_POOL)
     first_name = params[:fighter][:first_name].strip
     last_name = params[:fighter][:last_name].strip
-    flash[:notice] = @pool.add_or_create_fighter(first_name, last_name)
+    flash[:notice] = @pool.add_or_create_fighter(params[:id], first_name, last_name)
     redirect_to tournament_fighters_path(@tournament)
   end
 
