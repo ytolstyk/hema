@@ -35,6 +35,7 @@ describe Exchange do
     end
 
     it "should create exchange if all fields present" do
+      Exchange.any_instance.stub(:add_points)
       exchange = Exchange.create(afterblow: true, double_hit: true, match_id: 1, fighter_id: 1, seconds: 12)
       exchange.errors.full_messages.length.should == 0
     end

@@ -23,16 +23,19 @@
 <% end %>
 
 <ul>
-  <% @tournament.fighters.each do |fighter| %>
-    <li>
-      <%= fighter.first_name %> <%= fighter.last_name %>
-      <% if current_user %>
-        <form action="<%= tournaments_remove_fighter_path(@tournament, fighter_id: fighter.id) %>" class="delete-form-button" method="post">
-          <input name="_method" type="hidden" value="delete">
-          <input class="btn btn-small" type="submit" value="X">
-          <%= render partial: 'partials/authenticity_token' %>
-        </form>
-      <% end %>
-    </li>
+  <% @tournament.pools.each do |pool| %>
+    <%  pool.fighters.each do |fighter| %>
+      <li>
+        <%= fighter.first_name %> <%= fighter.last_name %> (<%= pool.name %>)
+        <% if current_user %>
+          <form action="<%= tournaments_remove_fighter_path(@tournament, fighter_id: fighter.id, pool_id: pool.id) %>"
+                class="delete-form-button" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <input class="btn btn-small" type="submit" value="X">
+            <%= render partial: 'partials/authenticity_token' %>
+          </form>
+        <% end %>
+      </li>
+    <% end %>
   <% end %>
 </ul>

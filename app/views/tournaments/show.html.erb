@@ -5,10 +5,3 @@
   <div><a href="<%= tournament_rules_path @tournament %>">Add/edit rules</a></div>
 <% end %>
 <div><a href="<%= tournament_fighters_path @tournament %>">Fighters</a></div>
-<ul>
-  <% @fighters.each do |fighter| %>
-    <li><a href="<%= fighters_show_path fighter %>">
-      <%= fighter.first_name %> <%= fighter.last_name %>
-    </a></li>
-  <% end %>
-</ul>

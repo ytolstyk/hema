@@ -44,14 +44,6 @@ describe Tournament do
       Tournament.reflect_on_association(:scores).macro.should == :has_many
     end
 
-    it "should have tournament_fighters" do
-      Tournament.reflect_on_association(:tournament_fighters).macro.should == :has_many
-    end
-
-    it "should have fighters" do
-      Tournament.reflect_on_association(:fighters).macro.should == :has_many
-    end
-
     it "should have pools" do
       Tournament.reflect_on_association(:pools).macro.should == :has_many
     end

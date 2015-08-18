@@ -101,4 +101,16 @@ class Pool < ActiveRecord::Base
     return -1 if name == Pool::DEFAULT_POOL
     name.split(' ').last.to_i
   end
+
+  def add_or_create_fighter(first_name, last_name)
+    fighter = Fighter.where(first_name: first_name, last_name: last_name)
+
+    if fighter.empty?
+      fighters.create(first_name: first_name, last_name: last_name)
+      "#{first_name} #{last_name} created and added"
+    else
+      pool_fighters.create(fighter_id: fighter.first.id)
+      "#{first_name} #{last_name} added"
+    end
+  end
 end

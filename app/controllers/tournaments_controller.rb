@@ -4,7 +4,6 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @fighters = @tournament.fighters
   end
 
   def create
@@ -26,7 +25,7 @@ class TournamentsController < ApplicationController
   end
 
   def tournament_pools
-    @tournament = Tournament.includes(:fighters, :pools, { pools: :fighters }).find(params[:id])
+    @tournament = Tournament.includes({ pools: :fighters }).find(params[:id])
   end
 
   def add_rules
@@ -57,20 +56,22 @@ class TournamentsController < ApplicationController
   end
 
   def show_fighters
-    @tournament = Tournament.includes(:fighters).find(params[:id])
+    @tournament = Tournament.includes({ pools: :fighters }).find(params[:id])
   end
 
   def add_fighter
     @tournament = Tournament.find(params[:id])
+    @pool = @tournament.pools.find_by_name(Pool::DEFAULT_POOL)
     first_name = params[:fighter][:first_name].strip
     last_name = params[:fighter][:last_name].strip
-    flash[:notice] = @tournament.add_or_create_fighter(first_name, last_name)
+    flash[:notice] = @pool.add_or_create_fighter(first_name, last_name)
     redirect_to tournament_fighters_path(@tournament)
   end
 
   def remove_fighter
-    @tournament = Tournament.find(params[:id])
-    @tournament.remove_fighter(params[:fighter_id])
+    @tournament = Tournament.includes({ pools: :fighters }).find(params[:id])
+    @pool = @tournament.pools.find(params[:pool_id])
+    @pool.remove_fighter(params[:fighter_id])
 
     fighter = Fighter.find_by_id(params[:fighter_id])
     flash[:notice] = "#{fighter.first_name} #{fighter.last_name} was removed" if fighter
