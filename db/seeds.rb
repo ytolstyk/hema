@@ -7,54 +7,40 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 EVENTS = [
-  { name: 'CombatCon', date: '04-01-2015', organizer: 'Blood and Iron', location: 'Las Vegas' },
-  { name: 'SoCal' },
-  { name: 'CombatCon', date: '02-02-2014', organizer: 'KRON'}
+  { name: 'CombatCon Test', date: '04-01-2015', organizer: 'Blood and Iron', location: 'Las Vegas' }
 ]
 
 TOURNAMENTS = [
-  { name: 'longsword', weapon_type: 'steel' },
-  { name: 'sabre', weapon_type: 'steel' },
-  { name: 'longsword', weapon_type: 'synthetic' },
-  { name: 'rapier', weapon_type: 'steel' }
+  { name: 'Longsword Test', weapon_type: 'steel' },
+  { name: 'Rapier Test', weapon_type: 'steel' }
 ]
 
 SCORES = [
   { target: 'head', points: 4 },
   { target: 'torso', points: 3 },
   { target: 'arm', points: 1 },
-  { target: 'leg', points: 2 },
-  { target: 'throw', points: 2 }
+  { target: 'leg', points: 2 }
 ]
 
 PLAYERS = [
-  { first_name: 'steve', last_name: 'martin' },
-  { first_name: 'mike', last_name: 'hip', school: 'KRON' },
-  { first_name: 'david', last_name: 'fortunado', school: 'Iron Lotus' },
-  { first_name: 'ashley', last_name: 'svenson' },
-  { first_name: 'mike', last_name: 'martin' },
-  { first_name: 'john', last_name: 'white' },
-  { first_name: 'ellie', last_name: 'jackson' },
-  { first_name: 'dasha', last_name: 'bronson' }
+  { first_name: 'steve', last_name: 'test' },
+  { first_name: 'mike', last_name: 'test', school: 'KRON' },
+  { first_name: 'david', last_name: 'test', school: 'Iron Lotus' },
+  { first_name: 'ashley', last_name: 'test' },
+  { first_name: 'mike', last_name: 'test' },
+  { first_name: 'john', last_name: 'test' },
+  { first_name: 'ellie', last_name: 'test' },
+  { first_name: 'dasha', last_name: 'test' }
 ]
 
-Fighter.create(PLAYERS)
-
-Event.create(EVENTS).each_with_index do |event, index|
-  event.tournaments.create(TOURNAMENTS[index % TOURNAMENTS.length ])
-  event.tournaments.create(TOURNAMENTS[(index + 1) % TOURNAMENTS.length])
+Event.create(EVENTS).each do |event|
+  event.tournaments.create(TOURNAMENTS)
 end
 
-Tournament.all.each_with_index do |tournament, index|
-  tournament.tournament_fighters.create(fighter_id: index % PLAYERS.length)
-  tournament.tournament_fighters.create(fighter_id: index + 1 % PLAYERS.length)
-  tournament.tournament_fighters.create(fighter_id: index + 2 % PLAYERS.length)
-  tournament.tournament_fighters.create(fighter_id: index + 3 % PLAYERS.length)
+Tournament.all.each_with_index do |tournament|
+  tournament.pools.first.fighters.create(PLAYERS)
 end
 
-Tournament.all.each_with_index do |tournament, index|
-  tournament.scores.create(SCORES[index % SCORES.length])
-  tournament.scores.create(SCORES[(index + 1) % SCORES.length])
-  tournament.scores.create(SCORES[(index + 2) % SCORES.length])
-  tournament.scores.create(SCORES[(index + 3) % SCORES.length])
+Tournament.all.each_with_index do |tournament|
+  tournament.scores.create(SCORES)
 end
