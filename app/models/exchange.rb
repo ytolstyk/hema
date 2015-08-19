@@ -10,6 +10,7 @@
 #  penalty    :integer
 #  fighter_id :integer          not null
 #  seconds    :integer          not null
+#  points     :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -18,11 +19,16 @@ class Exchange < ActiveRecord::Base
   validates :match_id, :fighter_id, :afterblow, :double_hit, :seconds, presence: true
   belongs_to :match
 
-  before_create :fill_boolean_fields
-  before_save :fill_boolean_fields
+  before_create :fill_boolean_fields, :add_points
+  before_save :fill_boolean_fields, :add_points
 
   def fill_boolean_fields
     self.afterblow ||= 'false'
     self.double_hit ||= 'false'
+  end
+
+  def add_points
+    scores = match.pool.tournament.scores
+    points = scores.where(target: target).first.points
   end
 end

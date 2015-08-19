@@ -32,14 +32,6 @@ describe Fighter do
   end
 
   context "associations" do
-    it "should have many tournament_fighters" do
-      Fighter.reflect_on_association(:tournament_fighters).macro.should == :has_many
-    end
-
-    it "should have many tournaments" do
-      Fighter.reflect_on_association(:tournaments).macro.should == :has_many
-    end
-
     it "should have many match_fighters" do
       Fighter.reflect_on_association(:match_fighters).macro.should == :has_many
     end
