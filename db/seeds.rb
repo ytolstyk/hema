@@ -11,8 +11,8 @@ EVENTS = [
 ]
 
 TOURNAMENTS = [
-  { name: 'longsword test', weapon_type: 'steel' },
-  { name: 'rapier', weapon_type: 'steel' }
+  { name: 'Longsword Test', weapon_type: 'steel' },
+  { name: 'Rapier Test', weapon_type: 'steel' }
 ]
 
 SCORES = [
@@ -23,14 +23,14 @@ SCORES = [
 ]
 
 PLAYERS = [
-  { first_name: 'steve', last_name: 'martin' },
-  { first_name: 'mike', last_name: 'hip', school: 'KRON' },
-  { first_name: 'david', last_name: 'fortunado', school: 'Iron Lotus' },
-  { first_name: 'ashley', last_name: 'svenson' },
-  { first_name: 'mike', last_name: 'martin' },
-  { first_name: 'john', last_name: 'white' },
-  { first_name: 'ellie', last_name: 'jackson' },
-  { first_name: 'dasha', last_name: 'bronson' }
+  { first_name: 'steve', last_name: 'test' },
+  { first_name: 'mike', last_name: 'test', school: 'KRON' },
+  { first_name: 'david', last_name: 'test', school: 'Iron Lotus' },
+  { first_name: 'ashley', last_name: 'test' },
+  { first_name: 'mike', last_name: 'test' },
+  { first_name: 'john', last_name: 'test' },
+  { first_name: 'ellie', last_name: 'test' },
+  { first_name: 'dasha', last_name: 'test' }
 ]
 
 Event.create(EVENTS).each do |event|
