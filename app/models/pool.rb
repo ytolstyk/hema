@@ -11,7 +11,7 @@
 
 class Pool < ActiveRecord::Base
   validates :tournament_id, :name, presence: true
-  belongs_to :tournament
+  belongs_to :tournament, dependent: :destroy
   has_many :matches
   has_many :pool_fighters,
     class_name: 'PoolFighter',

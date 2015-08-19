@@ -5,8 +5,8 @@
 #  id         :integer          not null, primary key
 #  match_id   :integer          not null
 #  target     :string(255)
-#  afterblow  :boolean          not null
-#  double_hit :boolean          not null
+#  afterblow  :boolean          default(FALSE)
+#  double_hit :boolean          default(FALSE)
 #  penalty    :integer
 #  fighter_id :integer          not null
 #  created_at :datetime

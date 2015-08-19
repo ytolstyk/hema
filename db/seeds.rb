@@ -11,8 +11,8 @@ EVENTS = [
 ]
 
 TOURNAMENTS = [
-  { name: 'Longsword Test', weapon_type: 'steel' },
-  { name: 'Rapier Test', weapon_type: 'steel' }
+  { name: 'Longsword Test', weapon_type: 'steel', victory_points: 15 },
+  { name: 'Rapier Test', weapon_type: 'steel', duration: 120 }
 ]
 
 SCORES = [
