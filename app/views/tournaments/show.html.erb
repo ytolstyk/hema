@@ -1,14 +1,68 @@
+<% if current_user %>
+  <%= javascript_include_tag 'tournaments/tournament_pools' %>
+<% end %>
+
 <h1><a href="<%= events_show_path @tournament.event_id %>"><%= @tournament.event.name %></a></h1>
 <h2><%= @tournament.name %></h2>
-<div><a href="<%= tournament_pools_path @tournament %>">Show pools</a></div>
 <% if current_user %>
   <div><a href="<%= tournament_rules_path @tournament %>">Add/edit rules</a></div>
+  <% if flash[:notice] %>
+    <div class="alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <form action="<%= tournaments_add_fighter_path(@tournament) %>" method="POST" role="form" id="addFighterForm">
+    <%= render partial: 'partials/authenticity_token' %>
+
+    <div class="form-group tournaments-show-fighters">
+      <label>First name<input type="text" name="fighter[first_name]" id="firstName" class="form-control"></label>
+      <label>Last name<input type="text" name="fighter[last_name]" id="lastName" class="form-control"></label>
+      <button class="btn btn-primary sign-in-button">Add</button>
+
+      <ul class="tournaments-show-fighters-typeahead-container"></ul>
+    </div>
+  </form>
 <% end %>
-<div><a href="<%= tournament_fighters_path @tournament %>">Fighters</a></div>
-<ul>
-  <% @fighters.each do |fighter| %>
-    <li><a href="<%= fighters_show_path fighter %>">
-      <%= fighter.first_name %> <%= fighter.last_name %>
-    </a></li>
+
+<ul class='tournament-pools-list'>
+  <% @tournament.pools.each do |pool| %>
+    <li class='tournament-pools-item' data-pool="<%= pool.id %>">
+      <a href="<%= pool_matches_path pool.id %>"><%= pool.name %></a>
+      <% if pool.name != Pool::DEFAULT_POOL && current_user %>
+        <form action="<%= pools_destroy_path(pool) %>" class="event-delete-form" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <input class="btn btn-small" type="submit" value="X">
+          <%= render partial: 'partials/authenticity_token' %>
+        </form>
+      <% end %>
+      <ul class='tournament-pool-fighters-sortable'>
+        <% pool.fighters.each do |fighter| %>
+          <li class='tournament-pools-fighter-item' data-fighter="<%= fighter.id %>">
+            <%= fighter.first_name %> <%= fighter.last_name %>
+            <% if current_user %>
+              <form action="<%= tournaments_remove_fighter_path(@tournament, fighter_id: fighter.id, pool_id: pool.id) %>"
+                    class="delete-form-button" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <input class="btn btn-small" type="submit" value="X">
+                <%= render partial: 'partials/authenticity_token' %>
+              </form>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
   <% end %>
 </ul>
+
+<% if current_user %>
+  <form action="<%= pools_create_path %>" method="POST" role="form" class="add-pool-button">
+    <%= render partial: 'partials/authenticity_token' %>
+    <input type="hidden" name="pool[tournament_id]" value="<%= @tournament.id %>">
+    <button class="btn btn-primary">Add pool</button>
+  </form>
+
+  <button type='button' class='btn btn-primary save-pools-button'
+          data-path="<%= tournaments_save_pools_path @tournament.id %>">Save</button>
+  <span class="alert alert-info tournament-pools-alert alert-hidden"></span>
+<% end %>

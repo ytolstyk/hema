@@ -6,7 +6,7 @@ describe TournamentsController do
   end
   let(:tournament) { Tournament.create(name: 'test name', weapon_type: 'wood', event_id: 1) }
 
-  [:show, :tournament_pools].each do |action|
+  [:show].each do |action|
     it "#{action} should render properly given the id" do
       get action, id: tournament.id
       response.status.should == 200

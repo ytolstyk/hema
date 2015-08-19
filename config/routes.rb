@@ -15,9 +15,7 @@ Rails.application.routes.draw do
 
   scope 'tournaments', controller: 'tournaments' do
     get ':id' => :show, as: :tournaments_show
-    get ':id/pools' => :tournament_pools, as: :tournament_pools
     get ':id/rules' => :add_rules, as: :tournament_rules
-    get ':id/fighters' => :show_fighters, as: :tournament_fighters
     post 'create' => :create, as: :tournaments_create
     post ':id/add_fighter' => :add_fighter, as: :tournaments_add_fighter
     post ':id/create_scores' => :create_scores, as: :tournaments_create_scores

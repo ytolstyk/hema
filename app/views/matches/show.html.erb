@@ -1,5 +1,14 @@
 <h1><a href="<%= tournaments_show_path @match.pool.tournament.id %>"><%= @match.pool.tournament.name %></a></h1>
 <h2><a href="<%= pool_matches_path @match.pool.id %>"><%= @match.pool.name %></a></h2>
+<h3>Status:
+  <% if @match.completed? %>
+    Completed
+  <% elsif @match.started? %>
+    In Progress
+  <% else %>
+    Not Started
+  <% end %>
+</h3>
 <ul>
   <% @match.exchanges.each_with_index do |exchange, index| %>
     <li><a href="<%= exchanges_show_path exchange.id %>">Exchange <%= index + 1 %></a></li>

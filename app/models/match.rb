@@ -25,7 +25,7 @@ class Match < ActiveRecord::Base
   after_create :create_match_info
 
   def create_match_info
-    match_info.create
+    MatchInfo.create(match_id: id)
   end
 
   def completed?
@@ -38,5 +38,19 @@ class Match < ActiveRecord::Base
 
   def elapsed_time
     exchanges.pluck(:seconds).max
+  end
+
+  def update_match_info
+    max_points = pool.tournament.victory_points
+    max_seconds = pool.tournament.duration
+    fighter_scores = Hash.new { |hash, key| hash[key] = 0 }
+
+    exchanges.each do |exchange|
+      fighter_scores[exchange.fighter_id] += exchange.points
+    end
+
+    if fighter_scores.values.any? { |points| points >= max_points }
+      match_info.update(match_completed: true)
+    end
   end
 end
