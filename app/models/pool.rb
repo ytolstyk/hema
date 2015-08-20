@@ -122,7 +122,7 @@ class Pool < ActiveRecord::Base
       "#{fighter.first_name} #{fighter.last_name} is already in the tournament"
     else
       pool_fighters.create(fighter_id: fighter.id)
-      "#{first_name} #{last_name} added"
+      "#{fighter.first_name} #{fighter.last_name} added"
     end
   end
 end
