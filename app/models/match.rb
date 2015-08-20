@@ -41,15 +41,25 @@ class Match < ActiveRecord::Base
   end
 
   def update_match_info
-    max_points = pool.tournament.victory_points
-    max_seconds = pool.tournament.duration
     fighter_scores = Hash.new { |hash, key| hash[key] = 0 }
 
     exchanges.each do |exchange|
       fighter_scores[exchange.fighter_id] += exchange.points
     end
 
-    if fighter_scores.values.any? { |points| points >= max_points }
+    update_match_completed(fighter_scores)
+  end
+
+  def update_match_completed(fighter_scores)
+    max_seconds = pool.tournament.duration
+    max_points = pool.tournament.victory_points
+    points = fighter_scores.values
+
+    if max_points && points.any? { |points| points >= max_points }
+      match_info.update(match_completed: true)
+    end
+
+    if max_seconds && elapsed_time >= max_seconds && points.first != points.last
       match_info.update(match_completed: true)
     end
   end
