@@ -61,7 +61,9 @@ class Pool < ActiveRecord::Base
 
   def add_fighter(fighter_id)
     pool_fighters.create(fighter_id: fighter_id)
-    generate_match fighter_id
+    if name != Pool::DEFAULT_POOL
+      generate_match fighter_id
+    end
   end
 
   def generate_match(fighter_id)
@@ -70,16 +72,6 @@ class Pool < ActiveRecord::Base
       match = matches.create
       match.match_fighters.create(fighter_id: fighter.fighter_id)
       match.match_fighters.create(fighter_id: fighter_id)
-    end
-  end
-
-  def generate_matches
-    matches_array = pool_fighters.combination(2).to_a
-    matches_array.each do |fighter_pair|
-      match = matches.create
-      fighter_pair.each do |fighter|
-        match.match_fighters.create(fighter_id: fighter.fighter_id)
-      end
     end
   end
 
