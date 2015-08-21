@@ -20,4 +20,5 @@ class Fighter < ActiveRecord::Base
   has_many :matches,
     through: :match_fighters,
     source: :match
+  has_many :exchanges
 end

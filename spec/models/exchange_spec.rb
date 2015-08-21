@@ -45,5 +45,9 @@ describe Exchange do
     it "should belong to a match" do
       Exchange.reflect_on_association(:match).macro.should == :belongs_to
     end
+
+    it "should belong to a fighter" do
+      Exchange.reflect_on_association(:fighter).macro.should == :belongs_to
+    end
   end
 end

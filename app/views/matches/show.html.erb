@@ -9,11 +9,47 @@
     Not Started
   <% end %>
 </h3>
-<ul>
-  <% @match.exchanges.each_with_index do |exchange, index| %>
-    <li><a href="<%= exchanges_show_path exchange.id %>">Exchange <%= index + 1 %></a></li>
-  <% end %>
-</ul>
 <% if current_user %>
   <a href="<%= exchanges_new_path @match.id %>">New Exchange</a>
 <% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Exchange</th>
+      <th>Time</th>
+      <th>Fighter</th>
+      <th>Target</th>
+      <th>Points</th>
+      <th>Afterblow</th>
+      <th>Double Hit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @match.exchanges.each_with_index do |exchange, index| %>
+      <tr>
+        <td>
+          Exchange <%= index + 1 %>
+        </td>
+        <td>
+          <%= time_in_minutes_from_seconds(exchange.seconds) %>
+        </td>
+        <td>
+          <%= fighter_full_name(exchange.fighter) %>
+        </td>
+        <td>
+          <%= exchange.target.capitalize %>
+        </td>
+        <td>
+          <%= exchange.points %>
+        </td>
+        <td>
+          <%= exchange.afterblow %>
+        </td>
+        <td>
+          <%= exchange.double_hit %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
