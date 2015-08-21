@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'exchanges/new' %>
+
 <h1><a href="<%= matches_show_path @match.id %>">Match</a></h1>
 
 <% if flash[:errors] %>
@@ -37,7 +39,8 @@
     <label class="form-control">
       Seconds
       <input type="number" min="<%= @match.elapsed_time %>" maxlength="10"
-             name="exchange[seconds]" value="<%= @match.elapsed_time %>">
+             name="exchange[seconds]" value="<%= @match.elapsed_time %>"
+             class="exchange-new-seconds-input">
     </label>
   </div>
 
@@ -61,5 +64,6 @@
     </label>
   </div>
 
-  <button class="btn btn-primary sign-in-button">Create</button>
+  <button type="submit" class="btn btn-primary create-exchange-button">Create</button>
+  <button type="button" class="btn btn-primary exchange-new-start-stop-button">Start Timer</button>
 </form>

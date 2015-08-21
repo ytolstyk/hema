@@ -37,7 +37,7 @@ class Match < ActiveRecord::Base
   end
 
   def elapsed_time
-    exchanges.pluck(:seconds).max
+    exchanges.pluck(:seconds).max || 0
   end
 
   def update_match_info
