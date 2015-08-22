@@ -40,7 +40,6 @@ Rails.application.routes.draw do
 
   scope 'exchanges', controller: 'exchanges' do
     get ':match_id/new' => :new, as: :exchanges_new
-    get ':id' => :show, as: :exchanges_show
     post ':match_id/create' => :create, as: :exchanges_create
   end
 

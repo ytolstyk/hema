@@ -20,10 +20,6 @@ class ExchangesController < ApplicationController
     end
   end
 
-  def show
-    @exchange = Exchange.includes(match: :match_fighters).find_by_id(params[:id])
-  end
-
   private
 
   def exchange_params

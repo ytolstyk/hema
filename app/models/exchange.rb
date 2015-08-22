@@ -18,6 +18,7 @@
 class Exchange < ActiveRecord::Base
   validates :match_id, :fighter_id, :seconds, presence: true
   belongs_to :match, dependent: :destroy
+  belongs_to :fighter
 
   before_create :add_points
   before_save :add_points

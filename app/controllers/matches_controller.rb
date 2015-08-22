@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
   def show
-    @match = Match.includes(pool: :tournament).find_by_id(params[:id])
+    @match = Match.includes(:match_info, :exchanges, { pool: :tournament }).find_by_id(params[:id])
   end
 end

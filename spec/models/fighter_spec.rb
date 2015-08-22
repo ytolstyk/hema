@@ -39,5 +39,9 @@ describe Fighter do
     it "should have many matches" do
       Fighter.reflect_on_association(:matches).macro.should == :has_many
     end
+
+    it "should have many exchanges" do
+      Fighter.reflect_on_association(:exchanges).macro.should == :has_many
+    end
   end
 end
