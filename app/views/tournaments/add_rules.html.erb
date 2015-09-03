@@ -18,4 +18,20 @@
     <div class="alert alert-danger tournaments-form-alert tournaments-form-alert-hidden" role="alert"></div>
     <div class="alert alert-success tournaments-form-alert tournaments-form-alert-hidden" role="alert"></div>
   </form>
+
+  <script type="text/template" class="add-rules-new-rule-template">
+    <div class="form-group tournament-rule">
+      <label>Target
+        <select type="text" name="score[target]" class="form-control tournament-rule-target">
+          <% score_options.each do |value, name| %>
+            <option value="<%= value %>"><%= name %></option>
+          <% end %>
+        </select>
+      </label>
+      <label>Points
+        <input type="number" name="tournament[name]" class="form-control tournament-rule-score" min="0" value="0">
+      </label>
+      <a href="#" class="tournament-rule-remove">Remove</a>
+    </div>
+  </script>
 </div>
