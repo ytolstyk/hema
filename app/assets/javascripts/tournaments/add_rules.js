@@ -60,7 +60,7 @@ hema.Tournaments.AddRules.prototype = {
   removeRule: function(event) {
     event.preventDefault();
     this.clearMessages();
-    if ($(this.ruleSelector).length < 1) {
+    if ($(this.ruleSelector).length < 2) {
       return;
     }
 
