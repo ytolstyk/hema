@@ -6,6 +6,7 @@ group :development do
   gem "annotate"
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'bullet'
 end
 
 gem 'newrelic_rpm'
