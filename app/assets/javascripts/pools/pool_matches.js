@@ -1,9 +1,11 @@
 var hema = hema || {};
 hema.Pools = {};
 
-hema.Pools.PoolMatches = function(sortableMatchesSelector, saveButtonSelector, alertSelector) {
+hema.Pools.PoolMatches = function(sortableMatchesSelector, saveButtonSelector,
+  alertSelector, matchSelector) {
   this.$sortableMatches = $(sortableMatchesSelector);
   this.$saveButton = $(saveButtonSelector);
+  this.$matches = $(matchSelector);
   this.$alert = $(alertSelector);
   this.matchSaveClick = this.matchSaveClick.bind(this);
 };
@@ -29,6 +31,6 @@ hema.Pools.PoolMatches.prototype = {
 
 $(function() {
   var poolMatches = new hema.Pools.PoolMatches('.pool-matches-sortable',
-    '.pool-matches-save', 'pool-matches-alert');
+    '.pool-matches-save', 'pool-matches-alert', '.pool-matches-match');
   poolMatches.init();
 });
