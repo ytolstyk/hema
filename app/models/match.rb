@@ -25,7 +25,7 @@ class Match < ActiveRecord::Base
 
   after_create :create_match_info, :populate_index
 
-  default_scope -> { order(index: :desc) }
+  default_scope -> { order(index: :asc) }
 
   def create_match_info
     MatchInfo.create(match_id: id)

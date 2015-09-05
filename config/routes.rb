@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   scope 'pools', controller: 'pools' do
     get ':id/matches' => :pool_matches, as: :pool_matches
     post 'create' => :create, as: :pools_create
+    post ':id/update-match-index' => :update_match_index, as: :update_match_index
     delete ':id' => :destroy, as: :pools_destroy
   end
 
