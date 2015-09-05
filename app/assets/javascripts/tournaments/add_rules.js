@@ -36,7 +36,7 @@ hema.Tournaments.AddRules.prototype = {
       data: this.payload(),
       error: this.handleError.bind(this),
       success: this.handleSuccess.bind(this)
-    })
+    });
   },
 
   clearMessages: function() {

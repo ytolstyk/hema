@@ -16,6 +16,8 @@
 /tmp
 *.log
 
+/config/database.yml
 config/database.yml
-database.yml
+/node_modules/*
 .DS_Store
+
