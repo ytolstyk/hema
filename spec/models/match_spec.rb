@@ -6,7 +6,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  pool_id    :string(255)      not null
-#  index      :integer          not null
+#  index      :integer
 #
 
 require 'spec_helper'

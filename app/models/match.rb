@@ -6,11 +6,11 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  pool_id    :string(255)      not null
-#  index      :integer          not null
+#  index      :integer
 #
 
 class Match < ActiveRecord::Base
-  validates :pool_id, :index, presence: true
+  validates :pool_id, presence: true
   belongs_to :pool
   has_many :exchanges
   has_many :match_fighters,
@@ -23,8 +23,7 @@ class Match < ActiveRecord::Base
     source: :fighter
   has_one :match_info, dependent: :destroy
 
-  before_create :populate_index
-  after_create :create_match_info
+  after_create :create_match_info, :populate_index
 
   default_scope -> { order(index: :desc) }
 
@@ -33,7 +32,7 @@ class Match < ActiveRecord::Base
   end
 
   def populate_index
-    self.index = pool.matches.length
+    update(index: pool.matches.length)
   end
 
   def completed?
