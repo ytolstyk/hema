@@ -6,6 +6,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  pool_id    :string(255)      not null
+#  index      :integer          not null
 #
 
 require 'spec_helper'
@@ -14,6 +15,7 @@ describe Match do
   context "create" do
     before(:each) do
       Match.any_instance.stub(:create_match_info)
+      Match.any_instance.stub(:populate_index)
     end
 
     it "should validate pool_id" do
@@ -22,7 +24,7 @@ describe Match do
     end
 
     it "should create match if pool_id exists" do
-      match = Match.create(pool_id: 1)
+      match = Match.create(pool_id: 1, index: 3)
       match.errors.full_messages.length.should == 0
     end
   end
