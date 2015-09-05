@@ -12,11 +12,6 @@ class PoolsController < ApplicationController
 
   def destroy
     @pool = Pool.find(params[:id])
-    if @pool.name == Pool::DEFAULT_POOL
-      redirect_to tournaments_show_path(@pool.tournament_id)
-      return
-    end
-
     @pool.remove_pool
     redirect_to tournaments_show_path(@pool.tournament_id)
   end
