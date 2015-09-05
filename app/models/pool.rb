@@ -11,12 +11,13 @@
 
 class Pool < ActiveRecord::Base
   validates :tournament_id, :name, presence: true
-  belongs_to :tournament, dependent: :destroy
-  has_many :matches
+  belongs_to :tournament
+  has_many :matches, dependent: :destroy
   has_many :pool_fighters,
     class_name: 'PoolFighter',
     primary_key: :id,
-    foreign_key: :pool_id
+    foreign_key: :pool_id,
+    dependent: :destroy
   has_many :fighters,
     through: :pool_fighters,
     source: :fighter
@@ -31,19 +32,18 @@ class Pool < ActiveRecord::Base
     return if name == Pool::DEFAULT_POOL
     reassign_fighters Pool::DEFAULT_POOL
     pool_number = get_pool_number
-    tournament = Tournament.find(tournament_id)
     tournament.pools.each do |pool|
       if pool.get_pool_number > pool_number
         pool.name_pool pool.get_pool_number - 1
       end
     end
+
     destroy
   end
 
   def reassign_fighters(pool_name)
     return if fighters.count == 0
-    
-    tournament = Tournament.find(tournament_id)
+  
     new_pool = tournament.pools.find_by_name(pool_name)
     new_pool = tournament.pools.create(name: DEFAULT_POOL) if new_pool.nil?
     fighters.each do |fighter|
