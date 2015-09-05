@@ -1,0 +1,15 @@
+{
+  "name": "hema-tournaments",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ytolstyk/hema.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-eslint": "0.0.5",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-nodeunit": "~0.4.1"
+  }
+}

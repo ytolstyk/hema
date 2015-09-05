@@ -1,0 +1,14 @@
+{
+  "freeze": true,
+  "nocomma": true,
+  "nonbsp": true,
+  "nonew": true,
+  "quotmark": "single",
+  "curly": true,
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "globals": {
+    "jQuery": true
+  }
+}

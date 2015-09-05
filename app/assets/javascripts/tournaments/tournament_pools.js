@@ -31,7 +31,7 @@ hema.Tournaments.Pools.prototype.savePools = function(evt) {
     data: this.payload(),
     error: this.handleResponse.bind(this),
     success: this.handleResponse.bind(this)
-  })
+  });
 };
 
 hema.Tournaments.Pools.prototype.payload = function() {
