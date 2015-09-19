@@ -15,6 +15,7 @@ hema.Pools.PoolMatches = function(sortableMatchesSelector, saveButtonSelector,
 
 hema.Pools.PoolMatches.prototype = {
   init: function() {
+    this.oldIndexMatches = this.payload().matches;
     this.sortable();
     this.listen();
   },
@@ -29,14 +30,42 @@ hema.Pools.PoolMatches.prototype = {
 
   matchSaveClick: function(event) {
     event.preventDefault();
+    this.clearMessages();
+    var payload = this.payload();
+
+    if (this.sameIndex(payload.matches)) {
+      return;
+    }
+
+    payload = this.cleanPayload(payload);
 
     $.ajax({
       url: this.savePath,
       method: 'POST',
-      data: this.payload(),
+      data: payload,
       error: this.handleError,
       success: this.handleResponse
     });
+  },
+
+  cleanPayload: function(payload) {
+    for (var match in this.oldIndexMatches) {
+      if (this.oldIndexMatches[match] === payload.matches[match]) {
+        delete payload.matches[match]
+      }
+    }
+
+    return payload;
+  },
+
+  sameIndex: function(matches) {
+    for (var match in this.oldIndexMatches) {
+      if (this.oldIndexMatches[match] !== matches[match]) {
+        return false;
+      }
+    }
+
+    return true;
   },
 
   clearMessages: function() {
@@ -44,6 +73,7 @@ hema.Pools.PoolMatches.prototype = {
   },
 
   handleResponse: function(data) {
+    this.oldIndexMatches = this.payload().matches;
     this.$alert.text(data.message);
     this.$alert.removeClass('alert-hidden');
   },
@@ -56,14 +86,11 @@ hema.Pools.PoolMatches.prototype = {
   payload: function() {
     var $matches = $(this.matchSelector);
     var payload = {
-      matches: []
+      matches: {}
     };
 
     $matches.each(function(index, element) {
-      payload.matches.push({
-        index: index + 1,
-        match_id: element.dataset.matchId
-      });
+      payload.matches[element.dataset.matchId] = index + 1;
     });
 
     return payload;

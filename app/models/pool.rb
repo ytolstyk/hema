@@ -120,9 +120,9 @@ class Pool < ActiveRecord::Base
 
   def update_match_indices(matches_hash)
     success = true
-    matches_hash.values.each do |match|
-      current_match = matches.find(match[:match_id])
-      success = false if !current_match.update(index: match[:index])
+    matches_hash.each do |match_id, index|
+      current_match = matches.find(match_id)
+      success = false if !current_match.update(index: index)
     end
 
     success
