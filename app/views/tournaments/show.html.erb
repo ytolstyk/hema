@@ -38,7 +38,7 @@
       <% end %>
       <ul class='tournament-pool-fighters-sortable'>
         <% pool.fighters.each do |fighter| %>
-          <li class='tournament-pools-fighter-item' data-fighter="<%= fighter.id %>">
+          <li class='tournament-pools-fighter-item sortable-item-cursor' data-fighter="<%= fighter.id %>">
             <%= fighter.first_name %> <%= fighter.last_name %>
             <% if current_user %>
               <form action="<%= tournaments_remove_fighter_path(@tournament, fighter_id: fighter.id, pool_id: pool.id) %>"
