@@ -20,6 +20,14 @@ class PoolsController < ApplicationController
     @pool = Pool.includes(:matches, { matches: :fighters }).find(params[:id])
   end
 
+  def update_match_index
+    @pool = Pool.includes(:matches).find(params[:id])
+    success = @pool.update_match_indices(params[:matches])
+    message = success ? 'Matches saved' : 'Failed to save matches'
+
+    render json: { success: success, message: message }
+  end
+
   private
 
   def pool_params

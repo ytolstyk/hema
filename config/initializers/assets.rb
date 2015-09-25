@@ -4,3 +4,4 @@
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += ['tournaments/*']
 Rails.application.config.assets.precompile += ['exchanges/*']
+Rails.application.config.assets.precompile += ['pools/*']

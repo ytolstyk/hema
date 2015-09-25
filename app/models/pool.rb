@@ -117,4 +117,14 @@ class Pool < ActiveRecord::Base
       "#{fighter.first_name} #{fighter.last_name} added"
     end
   end
+
+  def update_match_indices(matches_hash)
+    success = true
+    matches_hash.each do |match_id, index|
+      current_match = matches.find(match_id)
+      success = false if !current_match.update(index: index)
+    end
+
+    success
+  end
 end

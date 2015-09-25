@@ -1,14 +1,26 @@
+<% if current_user %>
+  <%= javascript_include_tag 'pools/pool_matches' %>
+<% end %>
+
 <h1><a href="<%= events_show_path @pool.tournament.event_id %>"><%= @pool.tournament.event.name %></a></h1>
 <h2><a href="<%= tournaments_show_path @pool.tournament.id %>"><%= @pool.tournament.name %></a></h2>
 <h3><%= @pool.name %></h3>
-<ul>
-<% @pool.matches.each_with_index do |match, index| %>
-  <li><a href="<%= matches_show_path match.id %>">Match <%= index + 1 %></a>
-    <ul>
-      <% match.fighters.each do |fighter| %>
-      <li><%= fighter.first_name %> <%= fighter.last_name %></li>
-      <% end %>
-    </ul>
-  </li>
-<% end %>
+<ul class="pool-matches-sortable">
+  <% @pool.matches.each do |match| %>
+    <li class="pool-matches-match" data-match-id="<%= match.id %>">
+      <a href="<%= matches_show_path match.id %>">Match <%= match.index %></a>
+      <ul>
+        <% match.fighters.each do |fighter| %>
+          <li><%= fighter.first_name %> <%= fighter.last_name %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
 </ul>
+
+<% if current_user %>
+  <button type="button" class="btn btn-primary pool-matches-save" data-path="<%= update_match_index_path @pool %>">
+    Save
+  </button>
+  <span class="alert alert-info pool-matches-alert alert-hidden"></span>
+<% end %>
