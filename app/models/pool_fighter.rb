@@ -25,4 +25,3 @@ class PoolFighter < ActiveRecord::Base
     end  
   end
 end
-

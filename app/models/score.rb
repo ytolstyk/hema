@@ -13,5 +13,5 @@
 class Score < ActiveRecord::Base
   validates :tournament_id, :target, :points, presence: true
   validates_uniqueness_of :target, scope: :tournament_id
-  belongs_to :tournament, dependent: :destroy
+  belongs_to :tournament
 end
