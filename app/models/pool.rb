@@ -7,6 +7,7 @@
 #  tournament_id :integer          not null
 #  created_at    :datetime
 #  updated_at    :datetime
+#  pool_type     :string(255)
 #
 
 class Pool < ActiveRecord::Base
@@ -23,6 +24,10 @@ class Pool < ActiveRecord::Base
     source: :fighter
 
   DEFAULT_POOL = 'Unassigned'
+  POOL_TYPES = {
+    :roundrobin => 'Roundrobin',
+    :elimination => 'Elimination'
+  }
 
   def self.all_tournament_fighters(tournament_id)
     Pool.where(tournament_id: tournament_id).map(&:fighters).flatten
@@ -66,13 +71,40 @@ class Pool < ActiveRecord::Base
     end
   end
 
-  def generate_match(fighter_id)
+  def find_partner(fighter_id)
     pool_fighters.each do |fighter|
       next if fighter_id.to_i == fighter.fighter_id.to_i
-      match = matches.create
-      match.match_fighters.create(fighter_id: fighter.fighter_id)
-      match.match_fighters.create(fighter_id: fighter_id)
+      if matches.empty?
+        return fighter.fighter_id
+      end
+      matches.each do |match|
+        if !match.match_fighters.exists?(fighter)
+          return fighter.fighter_id
+        end
+      end
     end
+    return -1
+  end
+
+  def generate_match(fighter_id)
+    if pool_type == POOL_TYPES[:elimination]
+      partner_id = find_partner(fighter_id)
+      if partner_id > 0
+        create_new_match(fighter_id, partner_id)
+      end
+      return
+    end
+
+    pool_fighters.each do |fighter|
+      next if fighter_id.to_i == fighter.fighter_id.to_i
+      create_new_match(fighter_id, fighter.fighter_id)
+    end
+  end
+
+  def create_new_match(fighter1, fighter2)
+    match = matches.create
+    match.match_fighters.create(fighter_id: fighter1)
+    match.match_fighters.create(fighter_id: fighter2)
   end
 
   def update_pool(fighter_list)

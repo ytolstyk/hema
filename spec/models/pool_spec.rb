@@ -7,6 +7,7 @@
 #  tournament_id :integer          not null
 #  created_at    :datetime
 #  updated_at    :datetime
+#  pool_type     :string(255)
 #
 
 require 'spec_helper'
